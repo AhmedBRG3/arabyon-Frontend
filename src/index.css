@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Poppins', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: 'IBM Plex Sans Arabic', 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --color-teal-950: #0a2e2e;
+  --color-teal-900: #0d3838;
+  --color-teal-800: #114b4b;
+  --color-teal-700: #166363;
+  --color-teal-600: #1c7a7a;
+  --color-teal-500: #269595;
+  --color-teal-100: #d9ece9;
+  --color-teal-50: #eef6f4;
+
+  --color-gold-600: #a8802f;
+  --color-gold-500: #c9a24b;
+  --color-gold-400: #d9b968;
+  --color-gold-300: #e3c878;
+  --color-gold-100: #f7ecd2;
+
+  --color-sand-50: #faf7f0;
+  --color-sand-100: #f3ecdd;
+
+  --color-ink-900: #1a1a1a;
+  --color-ink-700: #3f3f3f;
+  --color-ink-500: #6b6b6b;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-sand-50 text-ink-900 font-sans antialiased;
+}
+
+html[dir='rtl'] body {
+  font-family: var(--font-arabic);
+}
+
+h1, h2, h3, h4 {
+  @apply font-display;
+}
+
+html[dir='rtl'] h1,
+html[dir='rtl'] h2,
+html[dir='rtl'] h3,
+html[dir='rtl'] h4 {
+  font-family: var(--font-arabic);
+}
+
+::selection {
+  background: var(--color-gold-300);
+  color: var(--color-teal-950);
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(0, -22px) scale(1.06); }
+}
+@keyframes float-slow {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(0, 16px) scale(1.04); }
+}
+@keyframes underline-in {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes pop-in {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.animate-float {
+  animation: float 9s ease-in-out infinite;
+}
+.animate-float-slow {
+  animation: float-slow 13s ease-in-out infinite;
+}

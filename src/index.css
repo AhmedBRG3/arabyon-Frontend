@@ -6,16 +6,17 @@
   --font-display: 'Poppins', 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-arabic: 'IBM Plex Sans Arabic', 'Inter', ui-sans-serif, system-ui, sans-serif;
 
-  --color-teal-950: #0a2e2e;
-  --color-teal-900: #0d3838;
-  --color-teal-800: #114b4b;
-  --color-teal-700: #166363;
-  --color-teal-600: #1c7a7a;
-  --color-teal-500: #269595;
-  --color-teal-100: #d9ece9;
-  --color-teal-50: #eef6f4;
+  --color-teal-950: #0d5a40;
+  --color-teal-900: #0f6045;
+  --color-teal-800: #126b4c;
+  --color-teal-700: #157453;
+  --color-teal-600: #188059;
+  --color-teal-500: #2aa676;
+  --color-teal-100: #d6efe3;
+  --color-teal-50: #ecf7f1;
+  --color-forest-950: #06382a;
 
-  --color-gold-600: #a8802f;
+  --color-gold-600: #8a6620;
   --color-gold-500: #c9a24b;
   --color-gold-400: #d9b968;
   --color-gold-300: #e3c878;

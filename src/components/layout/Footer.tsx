@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useI18n } from '../../i18n/I18nContext'
 import { Container } from './Container'
+import logoLight from '../../assets/logo-light.png'
 
 export function Footer() {
   const { t } = useI18n()
@@ -18,12 +19,7 @@ export function Footer() {
     <footer className="mt-24 border-t border-teal-950/10 bg-teal-950 text-teal-50">
       <Container className="grid gap-10 py-14 md:grid-cols-3">
         <div>
-          <div className="group flex items-center gap-2 font-display text-lg font-bold text-white">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gold-500 font-display text-sm text-teal-950 transition-transform duration-300 ease-out group-hover:-rotate-6 group-hover:scale-110">
-              A
-            </span>
-            {t('brand')}
-          </div>
+          <img src={logoLight} alt={t('logoAlt')} width={720} height={327} className="h-14 w-auto" />
           <p className="mt-4 max-w-xs text-sm text-teal-100/80">{t('footer.tagline')}</p>
         </div>
 

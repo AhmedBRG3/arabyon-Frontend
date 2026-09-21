@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { useI18n } from '../../i18n/I18nContext'
 import { Container } from './Container'
 import { Button } from '../ui/Button'
+import logo from '../../assets/logo.png'
 
 const navItems = [
   { to: '/', key: 'nav.home' },
@@ -22,11 +23,14 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-teal-950/10 bg-sand-50/90 backdrop-blur">
       <Container className="flex h-16 items-center justify-between md:h-20">
-        <Link to="/" className="group flex items-center gap-2 font-display text-lg font-bold text-teal-950 md:text-xl">
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-teal-950 font-display text-sm text-gold-300 transition-transform duration-300 ease-out group-hover:-rotate-6 group-hover:scale-110 md:h-10 md:w-10">
-            A
-          </span>
-          {t('brand')}
+        <Link to="/" aria-label={t('logoAlt')} className="group flex items-center">
+          <img
+            src={logo}
+            alt={t('logoAlt')}
+            width={720}
+            height={327}
+            className="h-10 w-auto transition-transform duration-300 ease-out group-hover:scale-105 md:h-12"
+          />
         </Link>
 
         <nav className="hidden items-center gap-1 xl:flex">

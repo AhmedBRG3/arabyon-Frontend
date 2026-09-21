@@ -4,8 +4,10 @@ import { Footer } from './components/layout/Footer'
 import { Home } from './pages/Home'
 import { ProgramsConversational } from './pages/ProgramsConversational'
 import { ProgramsIGCSE } from './pages/ProgramsIGCSE'
+import { ProgramsUAE } from './pages/ProgramsUAE'
 import { BookTrial } from './pages/BookTrial'
 import { Contact } from './pages/Contact'
+import { FAQs } from './pages/FAQs'
 import { PlaceholderPage } from './pages/Placeholder'
 
 function App() {
@@ -17,9 +19,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/programs/conversational" element={<ProgramsConversational />} />
           <Route path="/programs/igcse" element={<ProgramsIGCSE />} />
+          <Route path="/programs/uae" element={<ProgramsUAE />} />
           <Route path="/about" element={<PlaceholderPage title="About" />} />
           <Route path="/book-trial" element={<BookTrial />} />
-          <Route path="/faqs" element={<PlaceholderPage title="FAQs" />} />
+          <Route path="/faqs" element={<FAQs />} />
           <Route path="/blog" element={<PlaceholderPage title="Blog" />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>

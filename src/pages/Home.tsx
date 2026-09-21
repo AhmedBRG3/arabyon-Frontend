@@ -7,7 +7,7 @@ import { PlaceholderBadge } from '../components/ui/PlaceholderBadge'
 import { Reveal } from '../components/ui/Reveal'
 import { CountUp } from '../components/ui/CountUp'
 import { IconBadge } from '../components/ui/IconBadge'
-import { SpeakIcon, CapIcon, EyeIcon, CompassIcon } from '../components/ui/icons'
+import { SpeakIcon, CapIcon, BookIcon, EyeIcon, CompassIcon } from '../components/ui/icons'
 import { testimonials } from '../data/mockTestimonials'
 
 const stats = [
@@ -88,11 +88,11 @@ export function Home() {
               {t('home.audienceTitle')}
             </h2>
           </Reveal>
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
             <Reveal delay={80}>
               <Link
                 to="/programs/conversational"
-                className="group relative block overflow-hidden rounded-3xl border border-teal-950/8 bg-white p-8 shadow-sm shadow-teal-950/5 transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-teal-600/25 hover:shadow-xl hover:shadow-teal-950/10"
+                className="group relative block h-full overflow-hidden rounded-3xl border border-teal-950/8 bg-white p-6 shadow-sm shadow-teal-950/5 transition-all duration-300 ease-out hover:-translate-y-1.5 lg:p-8 hover:border-teal-600/25 hover:shadow-xl hover:shadow-teal-950/10"
               >
                 <IconBadge tone="teal">
                   <SpeakIcon className="h-6 w-6" />
@@ -108,13 +108,29 @@ export function Home() {
             <Reveal delay={160}>
               <Link
                 to="/programs/igcse"
-                className="group relative block overflow-hidden rounded-3xl border border-teal-950/8 bg-white p-8 shadow-sm shadow-teal-950/5 transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-gold-500/30 hover:shadow-xl hover:shadow-teal-950/10"
+                className="group relative block h-full overflow-hidden rounded-3xl border border-teal-950/8 bg-white p-6 shadow-sm shadow-teal-950/5 transition-all duration-300 ease-out hover:-translate-y-1.5 lg:p-8 hover:border-gold-500/30 hover:shadow-xl hover:shadow-teal-950/10"
               >
                 <IconBadge tone="gold">
                   <CapIcon className="h-6 w-6" />
                 </IconBadge>
                 <h3 className="mt-5 text-xl font-bold text-teal-950">{t('home.audienceIgcseTitle')}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-ink-700">{t('home.audienceIgcseDesc')}</p>
+                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-teal-600 transition-all group-hover:gap-2.5">
+                  {t('common.learnMore')} <span aria-hidden>{locale === 'ar' ? '←' : '→'}</span>
+                </span>
+              </Link>
+            </Reveal>
+
+            <Reveal delay={240}>
+              <Link
+                to="/programs/uae"
+                className="group relative block h-full overflow-hidden rounded-3xl border border-teal-950/8 bg-white p-6 shadow-sm shadow-teal-950/5 transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-teal-600/25 hover:shadow-xl hover:shadow-teal-950/10 lg:p-8"
+              >
+                <IconBadge tone="teal">
+                  <BookIcon className="h-6 w-6" />
+                </IconBadge>
+                <h3 className="mt-5 text-xl font-bold text-teal-950">{t('home.audienceUaeTitle')}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-ink-700">{t('home.audienceUaeDesc')}</p>
                 <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-teal-600 transition-all group-hover:gap-2.5">
                   {t('common.learnMore')} <span aria-hidden>{locale === 'ar' ? '←' : '→'}</span>
                 </span>
@@ -171,7 +187,7 @@ export function Home() {
           <Reveal>
             <h2 className="text-center text-2xl font-bold text-teal-950 sm:text-3xl">{t('home.programsTitle')}</h2>
           </Reveal>
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
             <Reveal delay={80}>
               <Card hoverable className="flex h-full flex-col">
                 <span className="text-xs font-semibold uppercase tracking-wide text-teal-600">
@@ -192,6 +208,18 @@ export function Home() {
                 <h3 className="mt-2 text-lg font-bold text-teal-950">{t('programs.igcse.title')}</h3>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-700">{t('programs.igcse.sub')}</p>
                 <Button to="/programs/igcse" variant="secondary" className="mt-6 self-start">
+                  {t('common.learnMore')}
+                </Button>
+              </Card>
+            </Reveal>
+            <Reveal delay={240}>
+              <Card hoverable className="flex h-full flex-col">
+                <span className="text-xs font-semibold uppercase tracking-wide text-teal-600">
+                  {t('programs.uae.kicker')}
+                </span>
+                <h3 className="mt-2 text-lg font-bold text-teal-950">{t('programs.uae.title')}</h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-700">{t('programs.uae.sub')}</p>
+                <Button to="/programs/uae" variant="secondary" className="mt-6 self-start">
                   {t('common.learnMore')}
                 </Button>
               </Card>

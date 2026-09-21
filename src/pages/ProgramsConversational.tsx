@@ -11,6 +11,7 @@ import { scheduleSlots } from '../data/scheduleMock'
 export function ProgramsConversational() {
   const { t, td, locale } = useI18n()
   const levels = td<string[]>('programs.conversational.levels')
+  const fusha = td<{ title: string; desc: string }[]>('programs.conversational.fusha')
 
   return (
     <div>
@@ -91,39 +92,23 @@ export function ProgramsConversational() {
         </Container>
       </section>
 
-      {/* Dialects */}
+      {/* Why Fusha */}
       <section className="py-16 md:py-20">
         <Container>
           <Reveal>
             <h2 className="text-center text-xl font-bold text-teal-950 sm:text-2xl">
-              {t('programs.conversational.dialectTitle')}
+              {t('programs.conversational.fushaTitle')}
             </h2>
           </Reveal>
           <div className="mt-8 grid gap-5 md:grid-cols-3">
-            <Reveal delay={80}>
-              <Card hoverable className="h-full">
-                <h3 className="font-bold text-teal-950">{t('programs.conversational.dialectMSA')}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-700">
-                  {t('programs.conversational.dialectMSADesc')}
-                </p>
-              </Card>
-            </Reveal>
-            <Reveal delay={160}>
-              <Card hoverable className="h-full">
-                <h3 className="font-bold text-teal-950">{t('programs.conversational.dialectEgyptian')}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-700">
-                  {t('programs.conversational.dialectEgyptianDesc')}
-                </p>
-              </Card>
-            </Reveal>
-            <Reveal delay={240}>
-              <Card hoverable className="h-full">
-                <h3 className="font-bold text-teal-950">{t('programs.conversational.dialectGulf')}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-700">
-                  {t('programs.conversational.dialectGulfDesc')}
-                </p>
-              </Card>
-            </Reveal>
+            {fusha.map((item, i) => (
+              <Reveal key={item.title} delay={80 + i * 80}>
+                <Card hoverable className="h-full">
+                  <h3 className="font-bold text-teal-950">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-700">{item.desc}</p>
+                </Card>
+              </Reveal>
+            ))}
           </div>
         </Container>
       </section>

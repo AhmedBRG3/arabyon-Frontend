@@ -4,6 +4,7 @@ import { Container } from '../components/layout/Container'
 import { Button } from '../components/ui/Button'
 import { Label, TextArea, TextInput } from '../components/ui/Field'
 import { Reveal } from '../components/ui/Reveal'
+import { submitForm } from '../lib/submitForm'
 import { WhatsAppIcon, MailIcon, InstagramIcon, FacebookIcon, YoutubeIcon, CheckIcon } from '../components/ui/icons'
 
 const socials = [
@@ -15,10 +16,24 @@ const socials = [
 export function Contact() {
   const { t } = useI18n()
   const [submitted, setSubmitted] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState(false)
+  const [delivered, setDelivered] = useState(true)
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setSubmitted(true)
+    const data = Object.fromEntries(new FormData(e.currentTarget))
+    setSending(true)
+    setError(false)
+    try {
+      const result = await submitForm('contact', data)
+      setDelivered(result.delivered)
+      setSubmitted(true)
+    } catch {
+      setError(true)
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -41,23 +56,33 @@ export function Contact() {
                 </div>
                 <h2 className="mt-5 text-xl font-bold text-teal-950">{t('contact.successTitle')}</h2>
                 <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-ink-700">{t('contact.successDesc')}</p>
+                {!delivered && (
+                  <p role="status" className="mt-4 rounded-xl border border-dashed border-gold-500/60 bg-gold-100/60 p-3 text-xs text-gold-600">
+                    {t('common.demoNotice')}
+                  </p>
+                )}
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
                   <Label htmlFor="c-name">{t('contact.formName')}</Label>
-                  <TextInput id="c-name" required placeholder="Jane Doe" />
+                  <TextInput id="c-name" name="name" required autoComplete="name" />
                 </div>
                 <div>
                   <Label htmlFor="c-email">{t('contact.formEmail')}</Label>
-                  <TextInput id="c-email" type="email" required placeholder="jane@example.com" />
+                  <TextInput id="c-email" name="email" type="email" required autoComplete="email" dir="ltr" />
                 </div>
                 <div>
                   <Label htmlFor="c-message">{t('contact.formMessage')}</Label>
-                  <TextArea id="c-message" required rows={5} placeholder="How can we help?" />
+                  <TextArea id="c-message" name="message" required rows={5} />
                 </div>
-                <Button type="submit" size="lg" className="w-full justify-center">
-                  {t('contact.formSubmit')}
+                {error && (
+                  <p role="alert" className="rounded-xl bg-red-50 p-3 text-sm text-red-700">
+                    {t('common.errorTryAgain')}
+                  </p>
+                )}
+                <Button type="submit" size="lg" className="w-full justify-center" disabled={sending}>
+                  {sending ? t('common.sending') : t('contact.formSubmit')}
                 </Button>
               </form>
             )}

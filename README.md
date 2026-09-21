@@ -66,11 +66,27 @@ src/
 - **Type**: Poppins for English display headings, Inter for English body/UI, IBM Plex Sans Arabic for all Arabic text (headings and body).
 - **Components**: all reusable UI lives in `src/components/ui/` — extend `Button`, `Card`, `Field.tsx` inputs, etc. rather than styling ad hoc in pages.
 
+## Programs
+
+- **Conversational Arabic** — Modern Standard Arabic (Fusha) only.
+- **IGCSE Arabic** — for Arab students following the IG curriculum (no First/Foreign Language tracks).
+- **UAE Curriculum Arabic** — Arabic aligned to the UAE Ministry of Education curriculum (`/programs/uae`).
+
+IGCSE and UAE share one layout: `src/components/sections/ProgramPage.tsx`, driven by the `programs.igcse` / `programs.uae` keys in the i18n files.
+
+## Bookings: how a student joins, and how you find out
+
+1. The student submits the form on `/book-trial` (name, email, **WhatsApp number**, country, program, preferred time).
+2. The submission is POSTed as JSON to `VITE_FORM_ENDPOINT` (see `.env.example`) — that is how **you** learn about it. Point it at a Formspree / Web3Forms form (emails you every request) or a Make/Zapier webhook (e.g. into a Google Sheet or WhatsApp).
+3. You confirm a time, then send the student a private video-class link (Zoom / Google Meet) by WhatsApp and email. The student just clicks it at class time — no account needed.
+
+**If `VITE_FORM_ENDPOINT` is not set, the forms run in demo mode and nothing is delivered** — the success screen says so. Set it in Vercel under Project Settings → Environment Variables before going live.
+
 ## What's built vs. what's next
 
-**Built:** Home, Programs → Conversational Arabic, Programs → IGCSE Arabic, Book a Trial Class (with mock success state), Contact (form + WhatsApp + email + socials).
+**Built:** Home, Conversational Arabic, IGCSE Arabic, UAE Curriculum Arabic, Book a Trial Class, FAQs, Contact.
 
-**Stubbed (routes exist, minimal content):** About, FAQs, Blog. The components needed for these already exist (`Accordion` for FAQs, `Card` grid for Blog/tutor bios, mock data in `src/data/`) — they just need to be assembled into full page layouts the same way the built pages are.
+**Stubbed (route exists, minimal content):** About, Blog. Copy for both already exists in the i18n files and mock data in `src/data/`.
 
 ## Placeholder content
 

@@ -8,6 +8,7 @@ export function Footer() {
   const quickLinks = [
     { to: '/programs/conversational', key: 'nav.programsConversational' },
     { to: '/programs/igcse', key: 'nav.programsIGCSE' },
+    { to: '/programs/uae', key: 'nav.programsUAE' },
     { to: '/about', key: 'nav.about' },
     { to: '/faqs', key: 'nav.faqs' },
     { to: '/blog', key: 'nav.blog' },

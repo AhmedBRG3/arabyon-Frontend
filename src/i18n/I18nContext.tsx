@@ -9,9 +9,9 @@ const dictionaries: Record<Locale, typeof en> = { en, ar }
 const STORAGE_KEY = 'institute-locale'
 
 function getInitialLocale(): Locale {
-  if (typeof window === 'undefined') return 'en'
+  if (typeof window === 'undefined') return 'ar'
   const stored = window.localStorage.getItem(STORAGE_KEY)
-  return stored === 'ar' || stored === 'en' ? stored : 'en'
+  return stored === 'ar' || stored === 'en' ? stored : 'ar'
 }
 
 function resolve(dict: Record<string, unknown>, path: string): unknown {

@@ -8,6 +8,7 @@ const navItems = [
   { to: '/', key: 'nav.home' },
   { to: '/programs/conversational', key: 'nav.programsConversational' },
   { to: '/programs/igcse', key: 'nav.programsIGCSE' },
+  { to: '/programs/uae', key: 'nav.programsUAE' },
   { to: '/about', key: 'nav.about' },
   { to: '/faqs', key: 'nav.faqs' },
   { to: '/blog', key: 'nav.blog' },
@@ -28,7 +29,7 @@ export function Header() {
           {t('brand')}
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden items-center gap-1 xl:flex">
           {navItems.map((item) => (
             <NavLink
               key={item.to}
@@ -67,7 +68,7 @@ export function Header() {
             </Button>
           </div>
           <button
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-teal-950/15 transition-colors hover:bg-teal-950/5 lg:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-teal-950/15 transition-colors hover:bg-teal-950/5 xl:hidden"
             onClick={() => setOpen((o) => !o)}
             aria-label="Toggle menu"
             aria-expanded={open}
@@ -93,7 +94,7 @@ export function Header() {
       </Container>
 
       <div
-        className={`overflow-hidden border-t border-teal-950/10 bg-sand-50 transition-all duration-300 ease-out lg:hidden ${
+        className={`overflow-hidden border-t border-teal-950/10 bg-sand-50 transition-all duration-300 ease-out xl:hidden ${
           open ? 'max-h-[32rem] opacity-100' : 'max-h-0 border-t-0 opacity-0'
         }`}
       >

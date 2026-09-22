@@ -108,7 +108,7 @@ export function Contact() {
           </a>
 
           <a
-            href="mailto:hello@alhuda.example"
+            href="mailto:hello@arabyon.example"
             className="group flex items-center gap-3 rounded-2xl border border-teal-950/8 bg-white p-5 shadow-sm shadow-teal-950/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-teal-600/25 hover:shadow-lg hover:shadow-teal-950/10"
           >
             <span className="flex h-11 w-11 items-center justify-center rounded-full bg-teal-50 text-teal-700 transition-all duration-300 ease-out group-hover:-rotate-6 group-hover:scale-110 group-hover:bg-teal-700 group-hover:text-white">
@@ -116,7 +116,7 @@ export function Contact() {
             </span>
             <div>
               <div className="text-xs font-semibold uppercase tracking-wide text-ink-500">{t('contact.emailLabel')}</div>
-              <div className="font-semibold text-teal-950">hello@alhuda.example</div>
+              <div className="font-semibold text-teal-950">hello@arabyon.example</div>
             </div>
           </a>
 

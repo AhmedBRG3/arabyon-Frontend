@@ -43,8 +43,8 @@ export function Footer() {
           <h3 className="text-sm font-semibold uppercase tracking-wide text-gold-300">{t('footer.contactTitle')}</h3>
           <ul className="mt-4 space-y-2.5 text-sm text-teal-100/80">
             <li>
-              <a href="mailto:hello@alhuda.example" className="transition-colors hover:text-white">
-                hello@alhuda.example
+              <a href="mailto:hello@arabyon.example" className="transition-colors hover:text-white">
+                hello@arabyon.example
               </a>
             </li>
             <li dir="ltr" className="text-start">

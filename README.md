@@ -1,6 +1,6 @@
-# Al Huda — Arabic Institute Website Prototype
+# ArabyOn — Arabic Institute Website Prototype
 
-A front-end-only UI/UX prototype for **Al Huda** (الهدى), a bilingual (English/Arabic) Arabic-language institute site. No backend, no database, no real payments — forms submit to a mock "success" UI state.
+A front-end-only UI/UX prototype for **ArabyOn** (أرابي أون), a bilingual (English/Arabic) Arabic-language institute site. No backend, no database, no real payments — forms submit to a mock "success" UI state.
 
 The brand name lives in `src/i18n/en.json` / `src/i18n/ar.json` under the `"brand"` key if it ever needs to change.
 

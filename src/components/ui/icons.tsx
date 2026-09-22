@@ -148,6 +148,23 @@ export function ArrowIcon(props: IconProps) {
   )
 }
 
+export function LaptopIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <rect x="4" y="5" width="16" height="10.5" rx="1.2" />
+      <path d="M2.5 19h19M9.5 15.5h5" />
+    </svg>
+  )
+}
+
+export function PlayIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M7 5.5v13l11-6.5-11-6.5Z" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
 export function EyeIcon(props: IconProps) {
   return (
     <svg {...base} {...props}>

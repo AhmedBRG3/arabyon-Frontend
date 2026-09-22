@@ -3,6 +3,7 @@ import { Container } from '../components/layout/Container'
 import { Button } from '../components/ui/Button'
 import { Reveal } from '../components/ui/Reveal'
 import { CountUp } from '../components/ui/CountUp'
+import { HomeHero } from '../components/sections/HomeHero'
 import { MissionVisionStory } from '../components/sections/MissionVisionStory'
 import { AudienceStory } from '../components/sections/AudienceStory'
 import { TestimonialsStory } from '../components/sections/TestimonialsStory'
@@ -21,36 +22,7 @@ export function Home() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-teal-950">
-        <div className="animate-float pointer-events-none absolute -end-32 -top-32 h-96 w-96 rounded-full bg-gold-500/10 blur-3xl" />
-        <div className="animate-float-slow pointer-events-none absolute -start-24 bottom-0 h-72 w-72 rounded-full bg-teal-500/20 blur-3xl" />
-        <Container className="relative py-20 md:py-28">
-          <Reveal className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-gold-400/30 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-gold-300 transition-colors duration-300 hover:border-gold-400/60">
-              {t('home.heroKicker')}
-            </span>
-            <h1 className="mt-6 text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
-              {t('home.heroHeadline')}
-            </h1>
-            <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-teal-100/85 md:text-lg">
-              {t('home.heroSub')}
-            </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Button to="/book-trial" size="lg">
-                {t('home.heroCtaPrimary')}
-              </Button>
-              <Button
-                to="/programs/conversational"
-                size="lg"
-                variant="ghost"
-                className="!border-white/20 !text-white hover:!bg-white/10"
-              >
-                {t('home.heroCtaSecondary')}
-              </Button>
-            </div>
-          </Reveal>
-        </Container>
-      </section>
+      <HomeHero />
 
       {/* Vision & Mission — cinematic scroll-pinned story */}
       <MissionVisionStory />

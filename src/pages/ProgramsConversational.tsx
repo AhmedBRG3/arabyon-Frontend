@@ -166,9 +166,14 @@ export function ProgramsConversational() {
             <div className="rounded-3xl bg-gradient-to-br from-teal-800 to-teal-950 px-8 py-14 text-center transition-shadow duration-500 hover:shadow-2xl hover:shadow-teal-950/30 md:px-16">
               <h2 className="text-2xl font-bold text-white sm:text-3xl">{t('programs.conversational.ctaTitle')}</h2>
               <p className="mx-auto mt-3 max-w-lg text-sm text-teal-100/85">{t('programs.conversational.ctaDesc')}</p>
-              <Button to="/book-trial" size="lg" className="mt-7">
-                {t('common.bookFreeTrial')}
-              </Button>
+              <div className="mt-7 flex flex-wrap justify-center gap-3">
+                <Button to="/book-trial" size="lg">
+                  {t('common.bookFreeTrial')}
+                </Button>
+                <Button to="/tutors" size="lg" variant="ghost" className="border-white/30! text-white! hover:bg-white/10!">
+                  {t('tutors.seeTutors')}
+                </Button>
+              </div>
             </div>
           </Reveal>
         </Container>

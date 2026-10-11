@@ -11,7 +11,10 @@
     "bookTrial": "Book a Trial Class",
     "faqs": "FAQs",
     "blog": "Blog",
-    "contact": "Contact"
+    "contact": "Contact",
+    "tutors": "Tutors & Prices",
+    "myAccount": "My account",
+    "login": "Log in"
   },
   "common": {
     "placeholderBadge": "Placeholder content",
@@ -24,7 +27,18 @@
     "scrollHint": "Scroll",
     "sending": "Sending…",
     "errorTryAgain": "Something went wrong. Please try again or contact us on WhatsApp.",
-    "demoNotice": "Demo mode: no booking endpoint is configured, so this request was not delivered."
+    "demoNotice": "Demo mode: no booking endpoint is configured, so this request was not delivered.",
+    "previous": "Previous",
+    "next": "Next",
+    "save": "Save",
+    "saving": "Saving…",
+    "saved": "Saved",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search",
+    "yes": "Yes",
+    "no": "No"
   },
   "home": {
     "heroKicker": "Online Arabic Institute · Canada & UAE",
@@ -329,5 +343,252 @@
     "rights": "All rights reserved.",
     "quickLinks": "Quick links",
     "contactTitle": "Contact"
+  },
+  "errors": {
+    "forbiddenTitle": "No access",
+    "forbidden": "You don't have permission to do this.",
+    "invalidCredentials": "Incorrect email or password.",
+    "accountDisabled": "This account has been disabled. Please contact us.",
+    "emailTaken": "An account with this email already exists. Try logging in instead.",
+    "invalidToken": "This link is invalid or has expired. Please request a new one.",
+    "wrongPassword": "Your current password is incorrect.",
+    "offeringExists": "You already have an offering for this program.",
+    "programNotPublished": "Offerings can only be created for published programs.",
+    "needLesson": "Add at least one lesson before publishing.",
+    "ownAdminRole": "You can't remove your own Admin role.",
+    "lastRole": "A user must keep at least one role.",
+    "taHasOfferings": "Deactivate this tutor's offerings before removing the tutor role.",
+    "ownStatus": "You can't change your own account status.",
+    "network": "Can't reach the server. Check your connection and try again.",
+    "validation": "Some fields are invalid. Please check and try again.",
+    "unauthorized": "Your session has ended. Please log in again.",
+    "notFound": "We couldn't find that.",
+    "conflict": "This conflicts with the current data. Refresh and try again.",
+    "rateLimited": "Too many attempts. Please wait a minute and try again.",
+    "server": "Something went wrong on our side. Please try again."
+  },
+  "auth": {
+    "logout": "Log out",
+    "loginTitle": "Welcome back",
+    "loginSub": "Log in to manage your classes and profile.",
+    "noAccount": "New to ArabyOn?",
+    "registerLink": "Create an account",
+    "email": "Email address",
+    "password": "Password",
+    "forgotLink": "Forgot password?",
+    "loginSubmit": "Log in",
+    "passwordMismatch": "The passwords don't match.",
+    "registerTitle": "Create your account",
+    "registerSub": "One account for booking, classes, and billing.",
+    "registerDoneTitle": "Check your email",
+    "registerDoneDesc": "We sent you a link to confirm your email address. You can log in now and confirm it later.",
+    "haveAccount": "Already have an account?",
+    "loginLink": "Log in",
+    "fullName": "Full name",
+    "passwordHint": "At least 8 characters.",
+    "confirmPassword": "Confirm password",
+    "registerSubmit": "Create account",
+    "verifyTitle": "Confirm your email",
+    "verifying": "Confirming your email…",
+    "verifyDone": "Your email is confirmed. Thank you!",
+    "forgotTitle": "Reset your password",
+    "forgotSub": "Enter your email and we'll send you a reset link.",
+    "forgotDone": "If an account exists for that email, a reset link is on its way. It's valid for 30 minutes.",
+    "forgotSubmit": "Send reset link",
+    "backToLogin": "Back to log in",
+    "resetTitle": "Choose a new password",
+    "resetDone": "Your password has been changed. Please log in with your new password.",
+    "newPassword": "New password",
+    "resetSubmit": "Change password"
+  },
+  "dashboard": {
+    "backToAccount": "Go to my account",
+    "groupAccount": "My account",
+    "groupTeaching": "Teaching",
+    "groupAdmin": "Admin",
+    "navProfile": "Profile",
+    "navClasses": "My classes",
+    "navBilling": "Billing",
+    "navOfferings": "My offerings",
+    "navSessions": "Sessions",
+    "navEarnings": "Earnings",
+    "navUsers": "Users",
+    "navPrograms": "Programs",
+    "navAllOfferings": "Offerings",
+    "navTrials": "Trial requests",
+    "navPayments": "Payments",
+    "navZoom": "Zoom licenses",
+    "verifyEmailBanner": "Please confirm your email address using the link we sent you.",
+    "comingSoonTitle": "Coming soon — this screen will let you:"
+  },
+  "tutors": {
+    "kicker": "Tutors & Prices",
+    "title": "Choose your tutor",
+    "sub": "Every tutor sets their own monthly price and class size. Pick a program to see who teaches it.",
+    "allPrograms": "All programs",
+    "empty": "No tutors are listed for this program yet. Book a free trial and we'll match you.",
+    "perMonth": "per month",
+    "seatsLeft": "{count} seats left",
+    "full": "Full",
+    "joinWaitlist": "Ask about the waitlist",
+    "enrollmentNote": "Online enrollment and payment are coming soon. For now, book a free trial and we'll reserve your place with your tutor.",
+    "seeTutors": "See tutors & prices"
+  },
+  "profile": {
+    "title": "Profile",
+    "sub": "Your personal details and sign-in settings.",
+    "roles": "Roles",
+    "unverified": "Email not confirmed",
+    "memberSince": "Member since",
+    "basicTitle": "Basic information",
+    "studentTitle": "Student details",
+    "gradeLevel": "Grade / level",
+    "tutorTitle": "Tutor profile",
+    "bio": "Bio",
+    "bioHint": "Shown to students on the Tutors & Prices page.",
+    "subjects": "Subjects",
+    "subjectsHint": "Separate subjects with commas, e.g. IGCSE, Conversation.",
+    "passwordTitle": "Change password",
+    "currentPassword": "Current password",
+    "passwordNote": "Changing your password signs you out on every other device.",
+    "passwordSubmit": "Change password"
+  },
+  "roles": {
+    "Student": "Student",
+    "TA": "Tutor",
+    "Admin": "Admin"
+  },
+  "userStatus": {
+    "PendingVerification": "Pending verification",
+    "Active": "Active",
+    "Suspended": "Suspended",
+    "Banned": "Banned"
+  },
+  "programStatus": {
+    "Draft": "Draft",
+    "Published": "Published",
+    "Archived": "Archived"
+  },
+  "offerings": {
+    "invalidPrice": "Enter a price greater than zero.",
+    "active": "Active",
+    "inactive": "Inactive",
+    "seatsUsed": "{taken} of {capacity} seats taken",
+    "deactivate": "Deactivate",
+    "activate": "Activate",
+    "monthlyPrice": "Monthly price",
+    "capacity": "Capacity (students)",
+    "mineTitle": "My offerings",
+    "mineSub": "Each offering is one program you teach, with your monthly price and class size.",
+    "new": "New offering",
+    "mineEmpty": "You don't have any offerings yet. Create one to appear on the Tutors & Prices page.",
+    "noPrograms": "There are no published programs left to offer. Ask an admin to publish one.",
+    "program": "Program",
+    "currency": "Currency",
+    "create": "Create offering"
+  },
+  "admin": {
+    "usersTitle": "Users",
+    "usersSub": "Search accounts, manage roles, and suspend or restore access.",
+    "searchUsers": "Search by name or email",
+    "allRoles": "All roles",
+    "status": "Status",
+    "allStatuses": "All statuses",
+    "noUsers": "No users match these filters.",
+    "joined": "Joined",
+    "emailVerified": "Email confirmed",
+    "rolesNote": "Role changes reach the user's session within 15 minutes.",
+    "setStatus": "Set to {status}",
+    "programsTitle": "Programs",
+    "programsSub": "Programs must have at least one lesson before they can be published.",
+    "newProgram": "New program",
+    "noPrograms": "No programs yet.",
+    "lessonCount": "{count} lessons",
+    "createProgram": "Create program",
+    "programTitle": "Title",
+    "programDescription": "Description",
+    "programDetails": "Details",
+    "statusAction": {
+      "Draft": "Move to draft",
+      "Published": "Publish",
+      "Archived": "Archive"
+    },
+    "lessonsTitle": "Lessons",
+    "lessonsNote": "Use the arrows to change the order students follow.",
+    "noLessons": "No lessons yet.",
+    "confirmDeleteLesson": "Delete this lesson?",
+    "lessonPlaceholder": "Lesson title",
+    "addLesson": "Add lesson",
+    "moveUp": "Move up",
+    "moveDown": "Move down",
+    "offeringsTitle": "Offerings",
+    "offeringsSub": "Every tutor's live offering, with price and seats.",
+    "noOfferings": "No active offerings.",
+    "offeringsNote": "Only active offerings in published programs are listed. A deactivated offering can be reactivated by its tutor."
+  },
+  "soon": {
+    "classes": {
+      "title": "My classes",
+      "description": "Your upcoming sessions and class links.",
+      "points": [
+        "See every upcoming session in your own time zone.",
+        "Join your Zoom class with one click, 10 minutes before it starts.",
+        "Review past sessions and attendance."
+      ]
+    },
+    "billing": {
+      "title": "Billing",
+      "description": "Your subscriptions and payments.",
+      "points": [
+        "Subscribe to a tutor's monthly offering and pay online.",
+        "See when your next renewal is due, or cancel at the end of the month.",
+        "Download receipts for past payments."
+      ]
+    },
+    "taSessions": {
+      "title": "Sessions",
+      "description": "Schedule classes for your students.",
+      "points": [
+        "Schedule sessions for each offering; a Zoom meeting is created automatically.",
+        "Start your class from here with the host link.",
+        "See who attended each session."
+      ]
+    },
+    "earnings": {
+      "title": "Earnings",
+      "description": "What you've earned and when you'll be paid.",
+      "points": [
+        "Your share of every student payment, after commission.",
+        "Monthly payout history and status.",
+        "Payout to your mobile wallet or bank account."
+      ]
+    },
+    "trials": {
+      "title": "Trial requests",
+      "description": "Free trial bookings from the website.",
+      "points": [
+        "Every request from the Book a Free Trial form, in one list.",
+        "Track each one: new, contacted, scheduled, converted.",
+        "Match the student with a tutor and offering."
+      ]
+    },
+    "payments": {
+      "title": "Payments",
+      "description": "Money in from students.",
+      "points": [
+        "All payments with gateway reference and status.",
+        "Issue refunds.",
+        "Follow up failed renewals."
+      ]
+    },
+    "zoom": {
+      "title": "Zoom licenses",
+      "description": "The pool of licensed Zoom hosts used for classes.",
+      "points": [
+        "Add and deactivate licensed host accounts.",
+        "See which sessions use each license.",
+        "Spot times when every license is busy."
+      ]
+    }
   }
 }

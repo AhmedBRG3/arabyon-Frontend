@@ -1,4 +1,4 @@
-import type { ProgramStatus, Role, UserStatus } from '../api/types'
+import type { ProgramStatus, Role, SessionStatus, UserStatus } from '../api/types'
 
 export const ROLES: Role[] = ['Student', 'TA', 'Admin']
 export const USER_STATUSES: UserStatus[] = ['PendingVerification', 'Active', 'Suspended', 'Banned']
@@ -12,3 +12,9 @@ export const userStatusTone = (status: UserStatus) =>
 
 export const programStatusTone = (status: ProgramStatus) =>
   status === 'Published' ? 'teal' : status === 'Draft' ? 'gold' : 'gray'
+
+export const sessionStatusTone = (status: SessionStatus) =>
+  status === 'Scheduled' ? 'teal' : status === 'Live' ? 'gold' : status === 'Canceled' ? 'red' : 'gray'
+
+// Lengths offered when a tutor schedules a session, in minutes.
+export const SESSION_DURATIONS = [30, 45, 60, 90]

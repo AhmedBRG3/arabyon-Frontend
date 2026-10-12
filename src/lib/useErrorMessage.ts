@@ -16,6 +16,12 @@ const knownTitles: Record<string, string> = {
   'A user must keep at least one role.': 'errors.lastRole',
   "Deactivate this TA's offerings before removing the TA role.": 'errors.taHasOfferings',
   'You cannot change your own status.': 'errors.ownStatus',
+  'End time must be after the start time.': 'errors.sessionEndBeforeStart',
+  'Start time must be in the future.': 'errors.sessionStartInPast',
+  'No Zoom license is free for that time. Pick a different time or ask an admin to add another license.':
+    'errors.noLicenseAvailable',
+  'That Zoom license was just booked by another session. Please try again.': 'errors.licenseJustBooked',
+  'Zoom API request failed.': 'errors.zoomFailed',
 }
 
 const byStatus: Record<number, string> = {

@@ -173,3 +173,32 @@ export interface UpdateOfferingRequest {
   capacity: number
   isActive: boolean
 }
+
+// Sessions
+
+export type SessionStatus = 'Scheduled' | 'Live' | 'Completed' | 'Canceled'
+
+export interface Session {
+  id: string
+  taOfferingId: string
+  programId: string
+  programTitle: string
+  taId: string
+  taName: string
+  title: string
+  startsAtUtc: string
+  endsAtUtc: string
+  status: SessionStatus
+  joinUrl: string | null
+}
+
+export interface SessionListQuery extends PageQuery {
+  taOfferingId?: string
+}
+
+export interface CreateSessionRequest {
+  taOfferingId: string
+  title: string
+  startsAtUtc: string
+  endsAtUtc: string
+}

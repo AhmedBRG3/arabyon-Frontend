@@ -27,7 +27,7 @@ interface CommonProps {
 }
 
 type ButtonProps = CommonProps & ButtonHTMLAttributes<HTMLButtonElement> & { href?: undefined; to?: undefined }
-type LinkProps = CommonProps & { href?: string; to?: string }
+type LinkProps = CommonProps & { href?: string; to?: string; target?: string; rel?: string }
 
 export function Button(props: ButtonProps | LinkProps) {
   const { variant = 'primary', size = 'md', children, className = '', ...rest } = props
@@ -42,7 +42,7 @@ export function Button(props: ButtonProps | LinkProps) {
   }
   if ('href' in props && props.href) {
     return (
-      <a href={props.href} className={classes}>
+      <a href={props.href} target={props.target} rel={props.rel} className={classes}>
         {children}
       </a>
     )

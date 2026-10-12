@@ -365,7 +365,12 @@
     "notFound": "We couldn't find that.",
     "conflict": "This conflicts with the current data. Refresh and try again.",
     "rateLimited": "Too many attempts. Please wait a minute and try again.",
-    "server": "Something went wrong on our side. Please try again."
+    "server": "Something went wrong on our side. Please try again.",
+    "sessionEndBeforeStart": "The session must end after it starts.",
+    "sessionStartInPast": "Choose a start time in the future.",
+    "noLicenseAvailable": "No Zoom room is free at that time. Try a different time, or ask an admin to add another Zoom license.",
+    "licenseJustBooked": "That time was just booked by another session. Please try again.",
+    "zoomFailed": "Zoom couldn't create the meeting. Please try again, or contact an admin."
   },
   "auth": {
     "logout": "Log out",
@@ -590,5 +595,32 @@
         "Spot times when every license is busy."
       ]
     }
+  },
+  "sessions": {
+    "mineTitle": "My sessions",
+    "mineSub": "Schedule a live class for one of your offerings. A Zoom meeting is created automatically.",
+    "new": "New session",
+    "mineEmpty": "You haven't scheduled any sessions yet.",
+    "noOfferings": "You need an active offering before you can schedule a session.",
+    "offering": "Offering",
+    "title": "Session title",
+    "titlePlaceholder": "e.g. Lesson 3: Greetings",
+    "start": "Start time",
+    "duration": "Duration",
+    "minutes": "{count} minutes",
+    "timezoneNote": "Times are in your own time zone; students see them in theirs.",
+    "create": "Create session",
+    "creating": "Creating Zoom meeting…",
+    "join": "Join on Zoom",
+    "statusScheduled": "Scheduled",
+    "statusLive": "Live",
+    "statusCompleted": "Completed",
+    "statusCanceled": "Canceled"
+  },
+  "classes": {
+    "title": "My classes",
+    "sub": "Upcoming live classes. Click Join to open the Zoom meeting.",
+    "empty": "No upcoming classes yet. They'll appear here as soon as a tutor schedules one.",
+    "with": "with {tutor}"
   }
 }

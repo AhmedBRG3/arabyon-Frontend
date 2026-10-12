@@ -4,6 +4,7 @@ import type {
   AdminUserSummary,
   ChangePasswordRequest,
   CreateOfferingRequest,
+  CreateSessionRequest,
   Lesson,
   LoginRequest,
   Offering,
@@ -17,6 +18,8 @@ import type {
   ResetPasswordRequest,
   Role,
   SaveProgramRequest,
+  Session,
+  SessionListQuery,
   UpdateOfferingRequest,
   UpdateStudentProfileRequest,
   UpdateTAProfileRequest,
@@ -65,6 +68,12 @@ export const offeringsApi = {
   mine: () => api<Offering[]>('/offerings/mine'),
   create: (body: CreateOfferingRequest) => api<Offering>('/offerings', { method: 'POST', body }),
   update: (id: string, body: UpdateOfferingRequest) => api<Offering>(`/offerings/${id}`, { method: 'PUT', body }),
+}
+
+export const sessionsApi = {
+  list: (query: SessionListQuery = {}) => api<PagedResult<Session>>('/sessions', { query: { ...query } }),
+  mine: () => api<Session[]>('/sessions/mine'),
+  create: (body: CreateSessionRequest) => api<Session>('/sessions', { method: 'POST', body }),
 }
 
 export const adminUsersApi = {

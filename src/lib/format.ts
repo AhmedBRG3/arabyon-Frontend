@@ -36,6 +36,15 @@ export function formatDate(iso: string, locale: Locale) {
   return new Intl.DateTimeFormat(intlLocale(locale), { dateStyle: 'medium' }).format(new Date(iso))
 }
 
+/** Date and time in the viewer's own time zone, e.g. "Oct 12, 2026, 3:00 PM". */
+export function formatDateTime(iso: string, locale: Locale) {
+  return new Intl.DateTimeFormat(intlLocale(locale), { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(iso))
+}
+
+export function formatTime(iso: string, locale: Locale) {
+  return new Intl.DateTimeFormat(intlLocale(locale), { timeStyle: 'short' }).format(new Date(iso))
+}
+
 export function initials(name: string) {
   return name
     .split(/\s+/)

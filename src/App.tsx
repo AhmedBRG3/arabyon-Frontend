@@ -28,7 +28,9 @@ const ResetPassword = lazyNamed(() => import('./pages/auth/ResetPassword'), 'Res
 const DashboardLayout = lazyNamed(() => import('./components/dashboard/DashboardLayout'), 'DashboardLayout')
 const ComingSoon = lazyNamed(() => import('./components/dashboard/Panel'), 'ComingSoon')
 const Profile = lazyNamed(() => import('./pages/account/Profile'), 'Profile')
+const Classes = lazyNamed(() => import('./pages/account/Classes'), 'Classes')
 const TaOfferings = lazyNamed(() => import('./pages/ta/Offerings'), 'TaOfferings')
+const TaSessions = lazyNamed(() => import('./pages/ta/Sessions'), 'TaSessions')
 const AdminUsers = lazyNamed(() => import('./pages/admin/Users'), 'AdminUsers')
 const AdminUserDetail = lazyNamed(() => import('./pages/admin/UserDetail'), 'AdminUserDetail')
 const AdminPrograms = lazyNamed(() => import('./pages/admin/Programs'), 'AdminPrograms')
@@ -64,12 +66,12 @@ function App() {
               <Route element={<DashboardLayout />}>
                 <Route path="/account" element={<Profile />} />
                 <Route element={<RequireAuth roles={['Student']} />}>
-                  <Route path="/account/classes" element={<ComingSoon ns="soon.classes" />} />
+                  <Route path="/account/classes" element={<Classes />} />
                   <Route path="/account/billing" element={<ComingSoon ns="soon.billing" />} />
                 </Route>
                 <Route element={<RequireAuth roles={['TA']} />}>
                   <Route path="/ta/offerings" element={<TaOfferings />} />
-                  <Route path="/ta/sessions" element={<ComingSoon ns="soon.taSessions" />} />
+                  <Route path="/ta/sessions" element={<TaSessions />} />
                   <Route path="/ta/earnings" element={<ComingSoon ns="soon.earnings" />} />
                 </Route>
                 <Route element={<RequireAuth roles={['Admin']} />}>

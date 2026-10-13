@@ -1,6 +1,4 @@
 import type { ReactNode } from 'react'
-import { useI18n } from '../../i18n/I18nContext'
-import { PlaceholderBadge } from '../ui/PlaceholderBadge'
 
 export function PageHeader({ title, description, actions }: { title: string; description?: string; actions?: ReactNode }) {
   return (
@@ -28,29 +26,3 @@ export function EmptyState({ children }: { children: ReactNode }) {
   return <p className="rounded-xl bg-sand-50 p-6 text-center text-sm text-ink-500">{children}</p>
 }
 
-/**
- * Screen whose backend module isn't built yet. `ns` points at an i18n block with
- * `title`, `description` and a `points` list describing what the screen will do.
- */
-export function ComingSoon({ ns }: { ns: string }) {
-  const { t, td } = useI18n()
-  const points = td<string[]>(`${ns}.points`) ?? []
-
-  return (
-    <div>
-      <PageHeader title={t(`${ns}.title`)} description={t(`${ns}.description`)} />
-      <Panel>
-        <PlaceholderBadge />
-        <h2 className="mt-4 font-bold text-teal-950">{t('dashboard.comingSoonTitle')}</h2>
-        <ul className="mt-3 space-y-2">
-          {points.map((point) => (
-            <li key={point} className="flex gap-2 text-sm leading-relaxed text-ink-700">
-              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-500" />
-              {point}
-            </li>
-          ))}
-        </ul>
-      </Panel>
-    </div>
-  )
-}

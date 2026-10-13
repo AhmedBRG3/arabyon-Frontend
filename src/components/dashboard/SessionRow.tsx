@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import type { Session } from '../../api/types'
 import { useI18n } from '../../i18n/I18nContext'
 import { formatDateTime, formatTime } from '../../lib/format'
@@ -6,7 +7,7 @@ import { Button } from '../ui/Button'
 import { Pill } from '../ui/Pill'
 
 /** One session with its time in the viewer's time zone and a link straight into the Zoom meeting. */
-export function SessionRow({ session, showTutor = false }: { session: Session; showTutor?: boolean }) {
+export function SessionRow({ session, showTutor = false, actions }: { session: Session; showTutor?: boolean; actions?: ReactNode }) {
   const { t, locale } = useI18n()
 
   return (
@@ -25,11 +26,14 @@ export function SessionRow({ session, showTutor = false }: { session: Session; s
             {formatDateTime(session.startsAtUtc, locale)} – {formatTime(session.endsAtUtc, locale)}
           </p>
         </div>
-        {session.joinUrl && session.status !== 'Canceled' && (
-          <Button href={session.joinUrl} target="_blank" rel="noreferrer">
-            {t('sessions.join')}
-          </Button>
-        )}
+        <div className="flex flex-wrap gap-2">
+          {actions}
+          {session.joinUrl && session.status !== 'Canceled' && (
+            <Button href={session.joinUrl} target="_blank" rel="noreferrer">
+              {t('sessions.join')}
+            </Button>
+          )}
+        </div>
       </div>
     </li>
   )

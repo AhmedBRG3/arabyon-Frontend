@@ -61,7 +61,10 @@ export function AdminPrograms() {
                   <Link to={`/admin/programs/${p.id}`} className="font-semibold text-teal-950 hover:underline">
                     {p.title}
                   </Link>
-                  <p className="text-xs text-ink-500">{t('admin.lessonCount').replace('{count}', String(p.lessonCount))}</p>
+                  <p className="text-xs text-ink-500">
+                    {t('admin.lessonCount').replace('{count}', String(p.lessonCount))}
+                    {p.ownerName && ` · ${t('admin.byTutor').replace('{tutor}', p.ownerName)}`}
+                  </p>
                 </div>
                 <Pill tone={programStatusTone(p.status)}>{t(`programStatus.${p.status}`)}</Pill>
               </li>

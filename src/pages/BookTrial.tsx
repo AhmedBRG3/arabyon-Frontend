@@ -5,26 +5,37 @@ import { Button } from '../components/ui/Button'
 import { Label, Select, TextInput } from '../components/ui/Field'
 import { Reveal } from '../components/ui/Reveal'
 import { CheckIcon } from '../components/ui/icons'
-import { submitForm } from '../lib/submitForm'
+import { trialsApi } from '../api/endpoints'
+import { useErrorMessage } from '../lib/useErrorMessage'
 
 type Status = 'idle' | 'sending' | 'error' | 'done'
 
 export function BookTrial() {
   const { t, td } = useI18n()
+  const errorMessage = useErrorMessage()
   const [status, setStatus] = useState<Status>('idle')
-  const [delivered, setDelivered] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const howSteps = td<{ title: string; desc: string }[]>('bookTrial.how')
   const nextSteps = td<string[]>('bookTrial.next')
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const data = Object.fromEntries(new FormData(e.currentTarget))
+    const data = new FormData(e.currentTarget)
+    const field = (name: string) => String(data.get(name) ?? '').trim() || null
     setStatus('sending')
     try {
-      const result = await submitForm('trial', data)
-      setDelivered(result.delivered)
+      // Saved by the API and followed up from the admin Trial requests screen.
+      await trialsApi.submit({
+        name: field('name') ?? '',
+        email: field('email') ?? '',
+        whatsApp: field('whatsapp'),
+        country: field('country'),
+        program: field('program'),
+        preferredTime: field('preferredTime'),
+      })
       setStatus('done')
-    } catch {
+    } catch (err) {
+      setError(errorMessage(err))
       setStatus('error')
     }
   }
@@ -63,12 +74,6 @@ export function BookTrial() {
                     ))}
                   </ol>
                 </div>
-
-                {!delivered && (
-                  <p role="status" className="mt-4 rounded-xl border border-dashed border-gold-500/60 bg-gold-100/60 p-3 text-xs text-gold-600">
-                    {t('common.demoNotice')}
-                  </p>
-                )}
 
                 <Button onClick={() => setStatus('idle')} className="mt-6">
                   {t('bookTrial.successButton')}
@@ -127,7 +132,7 @@ export function BookTrial() {
                 </div>
                 {status === 'error' && (
                   <p role="alert" className="rounded-xl bg-red-50 p-3 text-sm text-red-700">
-                    {t('common.errorTryAgain')}
+                    {error ?? t('common.errorTryAgain')}
                   </p>
                 )}
                 <Button type="submit" size="lg" className="w-full justify-center" disabled={status === 'sending'}>

@@ -1,10 +1,15 @@
 import { api } from './client'
 import type {
   AccessTokenResponse,
+  AdminSubscriptionListQuery,
+  AdminSubscriptionRow,
   AdminUserSummary,
   ChangePasswordRequest,
   CreateOfferingRequest,
   CreateSessionRequest,
+  CreateTaCourseRequest,
+  CreateTrialRequest,
+  EarningsResponse,
   Lesson,
   LoginRequest,
   Offering,
@@ -17,15 +22,24 @@ import type {
   RegisterRequest,
   ResetPasswordRequest,
   Role,
+  RosterEntry,
   SaveProgramRequest,
   Session,
   SessionListQuery,
+  Subscription,
+  TaCourse,
+  TrialListQuery,
+  TrialRequest,
+  TrialRequestStatus,
   UpdateOfferingRequest,
   UpdateStudentProfileRequest,
+  UpdateTaCourseRequest,
   UpdateTAProfileRequest,
   UserListQuery,
   UserProfile,
   UserStatus,
+  ZoomLicense,
+  ZoomUser,
 } from './types'
 
 export const authApi = {
@@ -74,6 +88,49 @@ export const sessionsApi = {
   list: (query: SessionListQuery = {}) => api<PagedResult<Session>>('/sessions', { query: { ...query } }),
   mine: () => api<Session[]>('/sessions/mine'),
   create: (body: CreateSessionRequest) => api<Session>('/sessions', { method: 'POST', body }),
+  cancel: (id: string) => api<Session>(`/sessions/${id}/cancel`, { method: 'POST' }),
+}
+
+/** The signed-in tutor's own courses, students and earnings. */
+export const taApi = {
+  courses: () => api<TaCourse[]>('/ta/courses'),
+  course: (id: string) => api<TaCourse>(`/ta/courses/${id}`),
+  createCourse: (body: CreateTaCourseRequest) => api<TaCourse>('/ta/courses', { method: 'POST', body }),
+  updateCourse: (id: string, body: UpdateTaCourseRequest) => api<TaCourse>(`/ta/courses/${id}`, { method: 'PUT', body }),
+  changeCourseStatus: (id: string, status: ProgramStatus) =>
+    api<TaCourse>(`/ta/courses/${id}/status`, { method: 'PUT', body: { status } }),
+  addLesson: (id: string, title: string) => api<Lesson>(`/ta/courses/${id}/lessons`, { method: 'POST', body: { title } }),
+  updateLesson: (id: string, lessonId: string, title: string) =>
+    api<Lesson>(`/ta/courses/${id}/lessons/${lessonId}`, { method: 'PUT', body: { title } }),
+  deleteLesson: (id: string, lessonId: string) => api<void>(`/ta/courses/${id}/lessons/${lessonId}`, { method: 'DELETE' }),
+  reorderLessons: (id: string, lessonIds: string[]) =>
+    api<Lesson[]>(`/ta/courses/${id}/lessons/order`, { method: 'PUT', body: { lessonIds } }),
+  students: () => api<RosterEntry[]>('/ta/students'),
+  earnings: () => api<EarningsResponse>('/ta/earnings'),
+}
+
+export const subscriptionsApi = {
+  mine: () => api<Subscription[]>('/subscriptions/mine'),
+  cancel: (id: string) => api<Subscription>(`/subscriptions/${id}/cancel`, { method: 'POST' }),
+  resume: (id: string) => api<Subscription>(`/subscriptions/${id}/resume`, { method: 'POST' }),
+}
+
+export const trialsApi = {
+  submit: (body: CreateTrialRequest) => api<void>('/trial-requests', { method: 'POST', body }),
+}
+
+export const adminApi = {
+  trials: (query: TrialListQuery = {}) => api<PagedResult<TrialRequest>>('/admin/trial-requests', { query: { ...query } }),
+  updateTrial: (id: string, status: TrialRequestStatus, adminNotes: string | null) =>
+    api<TrialRequest>(`/admin/trial-requests/${id}`, { method: 'PUT', body: { status, adminNotes } }),
+  subscriptions: (query: AdminSubscriptionListQuery = {}) =>
+    api<PagedResult<AdminSubscriptionRow>>('/admin/subscriptions', { query: { ...query } }),
+  zoomLicenses: () => api<ZoomLicense[]>('/admin/zoom-licenses'),
+  createZoomLicense: (zoomUserId: string, email: string) =>
+    api<ZoomLicense>('/admin/zoom-licenses', { method: 'POST', body: { zoomUserId, email } }),
+  setZoomLicenseActive: (id: string, isActive: boolean) =>
+    api<ZoomLicense>(`/admin/zoom-licenses/${id}`, { method: 'PUT', body: { isActive } }),
+  zoomUsers: () => api<ZoomUser[]>('/admin/zoom/users'),
 }
 
 export const adminUsersApi = {

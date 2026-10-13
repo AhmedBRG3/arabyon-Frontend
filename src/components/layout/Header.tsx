@@ -5,7 +5,7 @@ import { useAuth } from '../../auth/AuthContext'
 import { homeFor } from '../../auth/redirects'
 import { Container } from './Container'
 import { Button } from '../ui/Button'
-import { UserIcon } from '../ui/icons'
+import { LoginIcon, UserIcon, UserPlusIcon } from '../ui/icons'
 import logo from '../../assets/logo.png'
 
 interface NavItem {
@@ -44,6 +44,40 @@ function Underline({ active }: { active: boolean }) {
         active ? 'scale-x-100' : ''
       }`}
     />
+  )
+}
+
+// Raised pills: a solid bottom edge that flattens when pressed.
+const authPill =
+  'inline-flex h-9 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3 text-xs font-semibold transition-all duration-150 ease-out hover:-translate-y-0.5 active:translate-y-0.5 active:shadow-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600 sm:h-10 sm:gap-2 sm:px-4 sm:text-sm'
+const darkPill = `${authPill} bg-teal-950 text-white shadow-[0_3px_0_var(--color-forest-950)] hover:bg-teal-800`
+const goldPill = `${authPill} bg-gold-500 text-forest-950 shadow-[0_3px_0_var(--color-gold-600)] hover:bg-gold-400`
+
+function AuthButtons() {
+  const { t } = useI18n()
+  const { status, user } = useAuth()
+
+  if (status === 'authenticated' && user) {
+    return (
+      <Link to={homeFor(user)} className={darkPill}>
+        <UserIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+        {t('nav.myAccount')}
+      </Link>
+    )
+  }
+  // Nothing while the session is still being restored, so the buttons don't flash.
+  if (status !== 'anonymous') return null
+  return (
+    <>
+      <Link to="/register" className={darkPill}>
+        <UserPlusIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+        {t('nav.register')}
+      </Link>
+      <Link to="/login" className={goldPill}>
+        <LoginIcon className="h-4 w-4 sm:h-5 sm:w-5 rtl:-scale-x-100" />
+        {t('nav.login')}
+      </Link>
+    </>
   )
 }
 
@@ -131,14 +165,8 @@ function ProgramsMenu() {
 
 export function Header() {
   const { t, locale, toggleLocale } = useI18n()
-  const { status, user } = useAuth()
   const [open, setOpen] = useState(false)
-  const account =
-    status === 'authenticated' && user
-      ? { to: homeFor(user), label: t('nav.myAccount') }
-      : status === 'anonymous'
-        ? { to: '/login', label: t('nav.login') }
-        : null
+  const languageLabel = locale === 'en' ? 'العربية' : 'English'
 
   return (
     <header className="sticky top-0 z-50 border-b border-teal-950/10 bg-sand-50/90 backdrop-blur">
@@ -162,34 +190,22 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2 md:gap-3">
+          {/* On phones the language switch moves into the menu to make room for the account buttons. */}
           <button
             onClick={toggleLocale}
-            className="rounded-full border border-teal-950/15 px-3 py-2 text-sm font-semibold text-teal-950 transition-all duration-300 hover:-translate-y-0.5 hover:border-teal-950/30 hover:bg-teal-950/5 hover:shadow-sm active:scale-95"
+            className="hidden rounded-full border border-teal-950/15 px-3 py-2 text-sm font-semibold text-teal-950 transition-all duration-300 hover:-translate-y-0.5 hover:border-teal-950/30 hover:bg-teal-950/5 hover:shadow-sm active:scale-95 sm:block"
             aria-label="Switch language"
           >
-            {locale === 'en' ? 'العربية' : 'English'}
+            {languageLabel}
           </button>
-          {account && (
-            <Link
-              to={account.to}
-              aria-label={account.label}
-              title={account.label}
-              className={`hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-colors md:inline-flex ${
-                status === 'authenticated'
-                  ? 'border-teal-950 bg-teal-950 text-gold-300 hover:bg-teal-800'
-                  : 'border-teal-950/15 text-teal-950 hover:bg-teal-950/5'
-              }`}
-            >
-              <UserIcon className="h-5 w-5" />
-            </Link>
-          )}
-          <div className="hidden sm:block">
+          <AuthButtons />
+          <div className="hidden 2xl:block">
             <Button to="/book-trial" size="md" className="whitespace-nowrap">
               {t('common.bookFreeTrial')}
             </Button>
           </div>
           <button
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-teal-950/15 transition-colors hover:bg-teal-950/5 xl:hidden"
+            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-teal-950/15 transition-colors hover:bg-teal-950/5 xl:hidden"
             onClick={() => setOpen((o) => !o)}
             aria-label="Toggle menu"
             aria-expanded={open}
@@ -235,16 +251,17 @@ export function Header() {
               {t(item.key)}
             </NavLink>
           ))}
-          {account && (
-            <NavLink
-              to={account.to}
-              onClick={() => setOpen(false)}
-              className="rounded-xl px-4 py-3 text-sm font-semibold text-teal-950 transition-colors hover:bg-teal-950/5 md:hidden"
-            >
-              {account.label}
-            </NavLink>
-          )}
-          <div className="mt-2 sm:hidden">
+          <button
+            onClick={() => {
+              toggleLocale()
+              setOpen(false)
+            }}
+            className="rounded-xl px-4 py-3 text-start text-sm font-semibold text-teal-950 transition-colors hover:bg-teal-950/5 sm:hidden"
+            aria-label="Switch language"
+          >
+            {languageLabel}
+          </button>
+          <div className="mt-2 2xl:hidden">
             <Button to="/book-trial" size="md" className="w-full justify-center">
               {t('common.bookFreeTrial')}
             </Button>

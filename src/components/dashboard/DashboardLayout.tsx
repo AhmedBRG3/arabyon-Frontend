@@ -24,8 +24,10 @@ const groups: NavGroup[] = [
     key: 'dashboard.groupTeaching',
     roles: ['TA'],
     items: [
+      { to: '/ta/courses', key: 'dashboard.navCourses' },
       { to: '/ta/offerings', key: 'dashboard.navOfferings' },
       { to: '/ta/sessions', key: 'dashboard.navSessions' },
+      { to: '/ta/students', key: 'dashboard.navStudents' },
       { to: '/ta/earnings', key: 'dashboard.navEarnings' },
     ],
   },

@@ -7,7 +7,7 @@ import { EmptyState, PageHeader } from '../../components/dashboard/Panel'
 import { Alert } from '../../components/ui/Alert'
 import { PageLoader } from '../../components/ui/Spinner'
 
-/** Every upcoming session from every tutor; any signed-in student may join until enrollment exists. */
+/** Upcoming sessions of the courses the student is subscribed to (everyone is, while enrollment is free). */
 export function Classes() {
   const { t } = useI18n()
   const errorMessage = useErrorMessage()

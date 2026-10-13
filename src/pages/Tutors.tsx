@@ -125,7 +125,6 @@ function FilterChip({ active, onClick, children }: { active: boolean; onClick: (
 
 function OfferingCard({ offering }: { offering: Offering }) {
   const { t, locale } = useI18n()
-  const seatsLeft = Math.max(0, offering.capacity - offering.seatsTaken)
 
   return (
     <article className="flex h-full flex-col rounded-2xl border border-teal-950/8 bg-white p-6 shadow-sm shadow-teal-950/5 transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-teal-600/25 hover:shadow-xl hover:shadow-teal-950/10">
@@ -149,14 +148,10 @@ function OfferingCard({ offering }: { offering: Offering }) {
             </div>
             <div className="text-xs text-ink-500">{t('tutors.perMonth')}</div>
           </div>
-          {seatsLeft > 0 ? (
-            <Pill tone="teal">{t('tutors.seatsLeft').replace('{count}', String(seatsLeft))}</Pill>
-          ) : (
-            <Pill tone="red">{t('tutors.full')}</Pill>
-          )}
+          <Pill tone="teal">{t('courses.studentCount').replace('{count}', String(offering.seatsTaken))}</Pill>
         </div>
-        <Button to="/book-trial" variant={seatsLeft > 0 ? 'primary' : 'ghost'} className="mt-5 w-full justify-center">
-          {seatsLeft > 0 ? t('common.bookFreeTrial') : t('tutors.joinWaitlist')}
+        <Button to="/book-trial" className="mt-5 w-full justify-center">
+          {t('common.bookFreeTrial')}
         </Button>
       </div>
     </article>

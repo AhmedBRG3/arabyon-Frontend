@@ -56,7 +56,7 @@ export function OfferingRow({ offering, showTutor = false }: { offering: Offerin
           {showTutor && <p className="mt-0.5 text-sm text-ink-700">{offering.taName}</p>}
           <p className="mt-1 text-sm text-ink-500">
             {formatMoney(offering.monthlyPriceMinorUnits, offering.currency, locale)} {t('tutors.perMonth')} ·{' '}
-            {t('offerings.seatsUsed').replace('{taken}', String(offering.seatsTaken)).replace('{capacity}', String(offering.capacity))}
+            {t('courses.studentCount').replace('{count}', String(offering.seatsTaken))}
           </p>
         </div>
         <div className="flex gap-2">
@@ -90,7 +90,7 @@ export function OfferingRow({ offering, showTutor = false }: { offering: Offerin
               id={`capacity-${offering.id}`}
               name="capacity"
               type="number"
-              min={Math.max(1, offering.seatsTaken)}
+              min={1}
               max={1000}
               required
               dir="ltr"

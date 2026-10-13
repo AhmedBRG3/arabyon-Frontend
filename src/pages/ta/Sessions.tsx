@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { offeringsApi, sessionsApi } from '../../api/endpoints'
-import type { CreateSessionRequest } from '../../api/types'
+import type { CreateSessionRequest, Session } from '../../api/types'
 import { useI18n } from '../../i18n/I18nContext'
 import { SESSION_DURATIONS } from '../../lib/labels'
 import { useErrorMessage } from '../../lib/useErrorMessage'
@@ -34,11 +34,39 @@ export function TaSessions() {
       {mine.data && mine.data.length > 0 && (
         <ul className="space-y-4">
           {mine.data.map((session) => (
-            <SessionRow key={session.id} session={session} />
+            <SessionRow key={session.id} session={session} actions={<CancelSessionButton session={session} />} />
           ))}
         </ul>
       )}
     </div>
+  )
+}
+
+/** Shown for sessions that haven't ended; canceling frees the Zoom room and removes the class from students' lists. */
+function CancelSessionButton({ session }: { session: Session }) {
+  const { t } = useI18n()
+  const errorMessage = useErrorMessage()
+  const queryClient = useQueryClient()
+  // Read once on mount; render must stay pure.
+  const [now] = useState(Date.now)
+  const cancel = useMutation({
+    mutationFn: () => sessionsApi.cancel(session.id),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['sessions'] }),
+    onError: (error) => window.alert(errorMessage(error)),
+  })
+
+  if (session.status === 'Canceled' || new Date(session.endsAtUtc).getTime() <= now) return null
+
+  return (
+    <Button
+      variant="ghost"
+      disabled={cancel.isPending}
+      onClick={() => {
+        if (window.confirm(t('sessions.confirmCancel'))) cancel.mutate()
+      }}
+    >
+      {cancel.isPending ? t('common.saving') : t('sessions.cancel')}
+    </Button>
   )
 }
 
@@ -97,7 +125,7 @@ function CreateSessionForm({ onDone }: { onDone: () => void }) {
         <>
           <EmptyState>{t('sessions.noOfferings')}</EmptyState>
           <div className="mt-4 flex gap-3">
-            <Button to="/ta/offerings">{t('dashboard.navOfferings')}</Button>
+            <Button to="/ta/courses">{t('dashboard.navCourses')}</Button>
             <Button variant="ghost" onClick={onDone}>
               {t('common.cancel')}
             </Button>

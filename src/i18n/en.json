@@ -14,6 +14,7 @@
     "contact": "Contact",
     "tutors": "Tutors & Prices",
     "myAccount": "My account",
+    "register": "Register",
     "login": "Log in"
   },
   "common": {
@@ -370,7 +371,12 @@
     "sessionStartInPast": "Choose a start time in the future.",
     "noLicenseAvailable": "No Zoom room is free at that time. Try a different time, or ask an admin to add another Zoom license.",
     "licenseJustBooked": "That time was just booked by another session. Please try again.",
-    "zoomFailed": "Zoom couldn't create the meeting. Please try again, or contact an admin."
+    "zoomFailed": "Zoom couldn't create the meeting. Please try again, or contact an admin.",
+    "lessonTitles": "Every lesson needs a title (200 characters at most).",
+    "courseNotYours": "This course belongs to another tutor.",
+    "courseUnavailable": "This course is no longer offered.",
+    "sessionEnded": "This class has already ended, so it can't be canceled.",
+    "licenseExists": "This Zoom user is already registered as a license."
   },
   "auth": {
     "logout": "Log out",
@@ -413,7 +419,7 @@
     "groupAdmin": "Admin",
     "navProfile": "Profile",
     "navClasses": "My classes",
-    "navBilling": "Billing",
+    "navBilling": "Subscriptions",
     "navOfferings": "My offerings",
     "navSessions": "Sessions",
     "navEarnings": "Earnings",
@@ -424,7 +430,8 @@
     "navPayments": "Payments",
     "navZoom": "Zoom licenses",
     "verifyEmailBanner": "Please confirm your email address using the link we sent you.",
-    "comingSoonTitle": "Coming soon — this screen will let you:"
+    "navCourses": "My courses",
+    "navStudents": "Students"
   },
   "tutors": {
     "kicker": "Tutors & Prices",
@@ -433,10 +440,7 @@
     "allPrograms": "All programs",
     "empty": "No tutors are listed for this program yet. Book a free trial and we'll match you.",
     "perMonth": "per month",
-    "seatsLeft": "{count} seats left",
-    "full": "Full",
-    "joinWaitlist": "Ask about the waitlist",
-    "enrollmentNote": "Online enrollment and payment are coming soon. For now, book a free trial and we'll reserve your place with your tutor.",
+    "enrollmentNote": "Online payment is coming soon. Until then every registered student is enrolled in every course for free — create an account to join the classes.",
     "seeTutors": "See tutors & prices"
   },
   "profile": {
@@ -478,7 +482,6 @@
     "invalidPrice": "Enter a price greater than zero.",
     "active": "Active",
     "inactive": "Inactive",
-    "seatsUsed": "{taken} of {capacity} seats taken",
     "deactivate": "Deactivate",
     "activate": "Activate",
     "monthlyPrice": "Monthly price",
@@ -529,72 +532,8 @@
     "offeringsTitle": "Offerings",
     "offeringsSub": "Every tutor's live offering, with price and seats.",
     "noOfferings": "No active offerings.",
-    "offeringsNote": "Only active offerings in published programs are listed. A deactivated offering can be reactivated by its tutor."
-  },
-  "soon": {
-    "classes": {
-      "title": "My classes",
-      "description": "Your upcoming sessions and class links.",
-      "points": [
-        "See every upcoming session in your own time zone.",
-        "Join your Zoom class with one click, 10 minutes before it starts.",
-        "Review past sessions and attendance."
-      ]
-    },
-    "billing": {
-      "title": "Billing",
-      "description": "Your subscriptions and payments.",
-      "points": [
-        "Subscribe to a tutor's monthly offering and pay online.",
-        "See when your next renewal is due, or cancel at the end of the month.",
-        "Download receipts for past payments."
-      ]
-    },
-    "taSessions": {
-      "title": "Sessions",
-      "description": "Schedule classes for your students.",
-      "points": [
-        "Schedule sessions for each offering; a Zoom meeting is created automatically.",
-        "Start your class from here with the host link.",
-        "See who attended each session."
-      ]
-    },
-    "earnings": {
-      "title": "Earnings",
-      "description": "What you've earned and when you'll be paid.",
-      "points": [
-        "Your share of every student payment, after commission.",
-        "Monthly payout history and status.",
-        "Payout to your mobile wallet or bank account."
-      ]
-    },
-    "trials": {
-      "title": "Trial requests",
-      "description": "Free trial bookings from the website.",
-      "points": [
-        "Every request from the Book a Free Trial form, in one list.",
-        "Track each one: new, contacted, scheduled, converted.",
-        "Match the student with a tutor and offering."
-      ]
-    },
-    "payments": {
-      "title": "Payments",
-      "description": "Money in from students.",
-      "points": [
-        "All payments with gateway reference and status.",
-        "Issue refunds.",
-        "Follow up failed renewals."
-      ]
-    },
-    "zoom": {
-      "title": "Zoom licenses",
-      "description": "The pool of licensed Zoom hosts used for classes.",
-      "points": [
-        "Add and deactivate licensed host accounts.",
-        "See which sessions use each license.",
-        "Spot times when every license is busy."
-      ]
-    }
+    "offeringsNote": "Only active offerings in published programs are listed. A deactivated offering can be reactivated by its tutor.",
+    "byTutor": "by {tutor}"
   },
   "sessions": {
     "mineTitle": "My sessions",
@@ -615,12 +554,113 @@
     "statusScheduled": "Scheduled",
     "statusLive": "Live",
     "statusCompleted": "Completed",
-    "statusCanceled": "Canceled"
+    "statusCanceled": "Canceled",
+    "cancel": "Cancel class",
+    "confirmCancel": "Cancel this class? Students will no longer see it and the Zoom meeting is deleted."
   },
   "classes": {
     "title": "My classes",
     "sub": "Upcoming live classes. Click Join to open the Zoom meeting.",
     "empty": "No upcoming classes yet. They'll appear here as soon as a tutor schedules one.",
     "with": "with {tutor}"
+  },
+  "courses": {
+    "title": "My courses",
+    "sub": "Create your own course, set its monthly price and lessons. Published courses appear on Tutors & Prices.",
+    "new": "New course",
+    "empty": "You haven't created a course yet.",
+    "create": "Create course",
+    "titlePlaceholder": "e.g. Arabic for Kids — Level 1",
+    "lessons": "Lessons",
+    "lessonsPlaceholder": "Greetings\nNumbers 1–10\nColours",
+    "lessonsHint": "One lesson per line. With at least one lesson the course is published straight away; otherwise it is saved as a draft.",
+    "studentCount": "{count} students enrolled",
+    "manage": "Manage",
+    "pauseEnrollment": "Pause course",
+    "resumeEnrollment": "Resume course",
+    "notPublishedNote": "Students can't see this course until it is published. Add at least one lesson, then press Publish.",
+    "pausedNote": "This course is paused: it is hidden from Tutors & Prices and new students are not enrolled."
+  },
+  "students": {
+    "title": "Students",
+    "sub": "Everyone enrolled in your courses.",
+    "empty": "No students are enrolled in your courses yet.",
+    "since": "Since {date}"
+  },
+  "earnings": {
+    "title": "Earnings",
+    "sub": "What your courses are worth each month.",
+    "freeNote": "Payments are not switched on yet: students are enrolled for free, so these are projected figures — no money is collected or paid out.",
+    "empty": "Create a course to see its earnings here.",
+    "projectedTotal": "Projected monthly total",
+    "course": "Course",
+    "students": "Students",
+    "projected": "Projected / month",
+    "sessions": "Classes",
+    "sessionsValue": "{held} held · {upcoming} upcoming"
+  },
+  "billing": {
+    "title": "My subscriptions",
+    "sub": "The courses you are enrolled in.",
+    "freeNote": "Billing isn't switched on yet, so every course is included for free.",
+    "empty": "You aren't enrolled in any course yet.",
+    "free": "Free for now",
+    "since": "enrolled {date}",
+    "leftOn": "left {date}",
+    "leave": "Leave course",
+    "rejoin": "Rejoin",
+    "confirmLeave": "Leave this course? Its classes will disappear from My classes. You can rejoin at any time."
+  },
+  "trials": {
+    "title": "Trial requests",
+    "sub": "Free-trial bookings from the website. Contact each family and track the follow-up.",
+    "empty": "No trial requests with this status.",
+    "notes": "Notes",
+    "notesPlaceholder": "e.g. Called on WhatsApp, prefers Saturdays"
+  },
+  "payments": {
+    "title": "Subscriptions & payments",
+    "sub": "Every student subscription and the payment behind it.",
+    "noGatewayNote": "No payment gateway is connected yet. All subscriptions are free auto-enrollments, so there are no payments, refunds or failed renewals to show.",
+    "count": "{count} subscriptions",
+    "empty": "No subscriptions match this filter.",
+    "student": "Student",
+    "course": "Course",
+    "payment": "Payment",
+    "paid": "Paid",
+    "freeAccess": "Free access",
+    "since": "Since"
+  },
+  "zoom": {
+    "title": "Zoom licenses",
+    "sub": "The Zoom host accounts classes are booked on. Each license can host one class at a time.",
+    "add": "Add license",
+    "empty": "No licenses yet. Tutors can't schedule classes until you add one.",
+    "upcoming": "{count} upcoming classes",
+    "addedOn": "added {date}",
+    "showSessions": "Show classes",
+    "hideSessions": "Hide classes",
+    "noSessions": "No upcoming classes on this license.",
+    "inactiveNote": "Inactive: no new classes are booked on it. Classes already scheduled keep their Zoom meeting.",
+    "noUsersLeft": "Every user in the Zoom account is already registered.",
+    "zoomUser": "Zoom user",
+    "licensed": "Licensed",
+    "basic": "Basic",
+    "basicNote": "Basic (free) Zoom users end group meetings after 40 minutes.",
+    "register": "Register license"
+  },
+  "subscriptionStatus": {
+    "Pending": "Pending",
+    "Active": "Active",
+    "PastDue": "Past due",
+    "Canceled": "Left",
+    "Expired": "Expired"
+  },
+  "trialStatus": {
+    "New": "New",
+    "Contacted": "Contacted",
+    "Scheduled": "Scheduled",
+    "Converted": "Converted",
+    "Closed": "Closed"
   }
 }

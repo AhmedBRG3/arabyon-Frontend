@@ -22,6 +22,11 @@ const knownTitles: Record<string, string> = {
     'errors.noLicenseAvailable',
   'That Zoom license was just booked by another session. Please try again.': 'errors.licenseJustBooked',
   'Zoom API request failed.': 'errors.zoomFailed',
+  'Every lesson needs a title of at most 200 characters.': 'errors.lessonTitles',
+  'This course belongs to another tutor.': 'errors.courseNotYours',
+  'This course is no longer offered.': 'errors.courseUnavailable',
+  'A session that has already ended cannot be canceled.': 'errors.sessionEnded',
+  'This Zoom user is already registered as a license.': 'errors.licenseExists',
 }
 
 const byStatus: Record<number, string> = {

@@ -39,6 +39,23 @@ export function UserIcon(props: IconProps) {
   )
 }
 
+export function UserPlusIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <circle cx="10" cy="8" r="3.4" />
+      <path d="M3 20c0-3.6 3.1-6.2 7-6.2 1.5 0 2.9.4 4 1.1M19 13v6M16 16h6" />
+    </svg>
+  )
+}
+
+export function LoginIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4M3 12h12M11 8l4 4-4 4" />
+    </svg>
+  )
+}
+
 export function UsersIcon(props: IconProps) {
   return (
     <svg {...base} {...props}>

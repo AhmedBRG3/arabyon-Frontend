@@ -4,6 +4,8 @@
 export type Role = 'Student' | 'TA' | 'Admin'
 export type UserStatus = 'PendingVerification' | 'Active' | 'Suspended' | 'Banned'
 export type ProgramStatus = 'Draft' | 'Published' | 'Archived'
+export type SubscriptionStatus = 'Pending' | 'Active' | 'PastDue' | 'Canceled' | 'Expired'
+export type TrialRequestStatus = 'New' | 'Contacted' | 'Scheduled' | 'Converted' | 'Closed'
 
 export interface PagedResult<T> {
   items: T[]
@@ -113,6 +115,8 @@ export interface ProgramSummary {
   status: ProgramStatus
   lessonCount: number
   createdAtUtc: string
+  /** Set for courses a tutor authored themselves. */
+  ownerName: string | null
 }
 
 export interface Lesson {
@@ -194,6 +198,8 @@ export interface Session {
 
 export interface SessionListQuery extends PageQuery {
   taOfferingId?: string
+  /** Admin view of the sessions booked on one Zoom license. */
+  zoomLicenseId?: string
 }
 
 export interface CreateSessionRequest {
@@ -201,4 +207,154 @@ export interface CreateSessionRequest {
   title: string
   startsAtUtc: string
   endsAtUtc: string
+}
+
+// Tutor courses: a program the tutor owns plus their priced offering of it. `id` is the program id.
+
+export interface TaCourse {
+  id: string
+  offeringId: string
+  title: string
+  description: string | null
+  status: ProgramStatus
+  lessons: Lesson[]
+  monthlyPriceMinorUnits: number
+  currency: string
+  capacity: number
+  isActive: boolean
+  studentCount: number
+  createdAtUtc: string
+}
+
+export interface CreateTaCourseRequest {
+  title: string
+  description: string | null
+  monthlyPriceMinorUnits: number
+  currency: string
+  capacity: number
+  /** With at least one lesson the course is published straight away; otherwise it starts as a draft. */
+  lessons: string[]
+}
+
+export interface UpdateTaCourseRequest {
+  title: string
+  description: string | null
+  monthlyPriceMinorUnits: number
+  capacity: number
+  isActive: boolean
+}
+
+// Subscriptions (free auto-enrollment until a payment gateway exists)
+
+export interface Subscription {
+  id: string
+  taOfferingId: string
+  programId: string
+  programTitle: string
+  taId: string
+  taName: string
+  monthlyPriceMinorUnits: number
+  currency: string
+  status: SubscriptionStatus
+  currentPeriodStartUtc: string | null
+  currentPeriodEndUtc: string | null
+  canceledAtUtc: string | null
+  createdAtUtc: string
+}
+
+export interface AdminSubscriptionRow {
+  id: string
+  studentId: string
+  studentName: string
+  studentEmail: string
+  taOfferingId: string
+  programTitle: string
+  taName: string
+  monthlyPriceMinorUnits: number
+  currency: string
+  status: SubscriptionStatus
+  hasPayments: boolean
+  createdAtUtc: string
+}
+
+export interface AdminSubscriptionListQuery extends PageQuery {
+  status?: SubscriptionStatus
+  taOfferingId?: string
+}
+
+export interface RosterEntry {
+  subscriptionId: string
+  taOfferingId: string
+  programTitle: string
+  studentId: string
+  studentName: string
+  studentEmail: string
+  status: SubscriptionStatus
+  subscribedAtUtc: string
+}
+
+/** Projected, not paid: price x active students, since no payments are collected yet. */
+export interface EarningsRow {
+  taOfferingId: string
+  programTitle: string
+  monthlyPriceMinorUnits: number
+  currency: string
+  isActive: boolean
+  activeStudents: number
+  projectedMonthlyMinorUnits: number
+  sessionsHeld: number
+  sessionsUpcoming: number
+}
+
+export interface EarningsResponse {
+  paymentsEnabled: boolean
+  offerings: EarningsRow[]
+}
+
+// Trial requests
+
+export interface CreateTrialRequest {
+  name: string
+  email: string
+  whatsApp: string | null
+  country: string | null
+  program: string | null
+  preferredTime: string | null
+}
+
+export interface TrialRequest {
+  id: string
+  fullName: string
+  email: string
+  whatsApp: string | null
+  country: string | null
+  program: string | null
+  preferredTime: string | null
+  status: TrialRequestStatus
+  adminNotes: string | null
+  createdAtUtc: string
+  updatedAtUtc: string | null
+}
+
+export interface TrialListQuery extends PageQuery {
+  status?: TrialRequestStatus
+}
+
+// Zoom licenses
+
+export interface ZoomLicense {
+  id: string
+  zoomUserId: string
+  email: string
+  isActive: boolean
+  assignedTaId: string | null
+  createdAtUtc: string
+  upcomingSessionCount: number
+}
+
+export interface ZoomUser {
+  id: string
+  email: string
+  /** Zoom user type: 1 Basic, 2 Licensed. */
+  type: number
 }

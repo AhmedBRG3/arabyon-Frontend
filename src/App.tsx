@@ -26,16 +26,23 @@ const VerifyEmail = lazyNamed(() => import('./pages/auth/VerifyEmail'), 'VerifyE
 const ForgotPassword = lazyNamed(() => import('./pages/auth/ForgotPassword'), 'ForgotPassword')
 const ResetPassword = lazyNamed(() => import('./pages/auth/ResetPassword'), 'ResetPassword')
 const DashboardLayout = lazyNamed(() => import('./components/dashboard/DashboardLayout'), 'DashboardLayout')
-const ComingSoon = lazyNamed(() => import('./components/dashboard/Panel'), 'ComingSoon')
 const Profile = lazyNamed(() => import('./pages/account/Profile'), 'Profile')
 const Classes = lazyNamed(() => import('./pages/account/Classes'), 'Classes')
+const Billing = lazyNamed(() => import('./pages/account/Billing'), 'Billing')
+const TaCourses = lazyNamed(() => import('./pages/ta/Courses'), 'TaCourses')
+const TaCourseDetail = lazyNamed(() => import('./pages/ta/CourseDetail'), 'TaCourseDetail')
 const TaOfferings = lazyNamed(() => import('./pages/ta/Offerings'), 'TaOfferings')
 const TaSessions = lazyNamed(() => import('./pages/ta/Sessions'), 'TaSessions')
+const TaStudents = lazyNamed(() => import('./pages/ta/Students'), 'TaStudents')
+const TaEarnings = lazyNamed(() => import('./pages/ta/Earnings'), 'TaEarnings')
 const AdminUsers = lazyNamed(() => import('./pages/admin/Users'), 'AdminUsers')
 const AdminUserDetail = lazyNamed(() => import('./pages/admin/UserDetail'), 'AdminUserDetail')
 const AdminPrograms = lazyNamed(() => import('./pages/admin/Programs'), 'AdminPrograms')
 const AdminProgramDetail = lazyNamed(() => import('./pages/admin/ProgramDetail'), 'AdminProgramDetail')
 const AdminOfferings = lazyNamed(() => import('./pages/admin/Offerings'), 'AdminOfferings')
+const AdminTrials = lazyNamed(() => import('./pages/admin/Trials'), 'AdminTrials')
+const AdminPayments = lazyNamed(() => import('./pages/admin/Payments'), 'AdminPayments')
+const AdminZoomLicenses = lazyNamed(() => import('./pages/admin/ZoomLicenses'), 'AdminZoomLicenses')
 
 function App() {
   return (
@@ -67,12 +74,15 @@ function App() {
                 <Route path="/account" element={<Profile />} />
                 <Route element={<RequireAuth roles={['Student']} />}>
                   <Route path="/account/classes" element={<Classes />} />
-                  <Route path="/account/billing" element={<ComingSoon ns="soon.billing" />} />
+                  <Route path="/account/billing" element={<Billing />} />
                 </Route>
                 <Route element={<RequireAuth roles={['TA']} />}>
+                  <Route path="/ta/courses" element={<TaCourses />} />
+                  <Route path="/ta/courses/:id" element={<TaCourseDetail />} />
                   <Route path="/ta/offerings" element={<TaOfferings />} />
                   <Route path="/ta/sessions" element={<TaSessions />} />
-                  <Route path="/ta/earnings" element={<ComingSoon ns="soon.earnings" />} />
+                  <Route path="/ta/students" element={<TaStudents />} />
+                  <Route path="/ta/earnings" element={<TaEarnings />} />
                 </Route>
                 <Route element={<RequireAuth roles={['Admin']} />}>
                   <Route path="/admin/users" element={<AdminUsers />} />
@@ -80,9 +90,9 @@ function App() {
                   <Route path="/admin/programs" element={<AdminPrograms />} />
                   <Route path="/admin/programs/:id" element={<AdminProgramDetail />} />
                   <Route path="/admin/offerings" element={<AdminOfferings />} />
-                  <Route path="/admin/trials" element={<ComingSoon ns="soon.trials" />} />
-                  <Route path="/admin/payments" element={<ComingSoon ns="soon.payments" />} />
-                  <Route path="/admin/zoom" element={<ComingSoon ns="soon.zoom" />} />
+                  <Route path="/admin/trials" element={<AdminTrials />} />
+                  <Route path="/admin/payments" element={<AdminPayments />} />
+                  <Route path="/admin/zoom" element={<AdminZoomLicenses />} />
                 </Route>
               </Route>
             </Route>

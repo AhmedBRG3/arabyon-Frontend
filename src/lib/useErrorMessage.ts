@@ -27,6 +27,10 @@ const knownTitles: Record<string, string> = {
   'This course is no longer offered.': 'errors.courseUnavailable',
   'A session that has already ended cannot be canceled.': 'errors.sessionEnded',
   'This Zoom user is already registered as a license.': 'errors.licenseExists',
+  'This course has students enrolled and cannot be deleted. Archive it instead.': 'errors.courseHasStudents',
+  'You cannot subscribe to your own course.': 'errors.ownCourse',
+  'This course is full.': 'errors.courseFull',
+  'This course has scheduled or past classes and cannot be deleted. Archive it instead.': 'errors.courseHasClasses',
 }
 
 const byStatus: Record<number, string> = {

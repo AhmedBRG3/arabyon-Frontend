@@ -1,7 +1,8 @@
-import { useQuery } from '@tanstack/react-query'
-import { useSearchParams } from 'react-router-dom'
-import { offeringsApi, programsApi } from '../api/endpoints'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { Link, useSearchParams } from 'react-router-dom'
+import { offeringsApi, programsApi, subscriptionsApi } from '../api/endpoints'
 import type { Offering } from '../api/types'
+import { useAuth } from '../auth/AuthContext'
 import { useI18n } from '../i18n/I18nContext'
 import { formatMoney, initials } from '../lib/format'
 import { useErrorMessage } from '../lib/useErrorMessage'
@@ -148,12 +149,82 @@ function OfferingCard({ offering }: { offering: Offering }) {
             </div>
             <div className="text-xs text-ink-500">{t('tutors.perMonth')}</div>
           </div>
-          <Pill tone="teal">{t('courses.studentCount').replace('{count}', String(offering.seatsTaken))}</Pill>
+          <Pill tone={offering.seatsTaken >= offering.capacity ? 'gray' : 'teal'}>
+            {t('tutors.seats').replace('{taken}', String(offering.seatsTaken)).replace('{capacity}', String(offering.capacity))}
+          </Pill>
         </div>
-        <Button to="/book-trial" className="mt-5 w-full justify-center">
-          {t('common.bookFreeTrial')}
-        </Button>
+        <SubscribeButton offering={offering} />
       </div>
     </article>
+  )
+}
+
+/**
+ * Students subscribe straight from the card (free while there is no payment gateway); visitors are sent to log in
+ * and come back here. Tutors and admins still see the trial button.
+ */
+function SubscribeButton({ offering }: { offering: Offering }) {
+  const { t } = useI18n()
+  const errorMessage = useErrorMessage()
+  const queryClient = useQueryClient()
+  const { status, hasRole } = useAuth()
+  const isStudent = status === 'authenticated' && hasRole('Student')
+
+  // Same key as the Subscriptions page, so every card shares one request.
+  const mine = useQuery({ queryKey: ['subscriptions', 'mine'], queryFn: subscriptionsApi.mine, enabled: isStudent })
+  const subscribe = useMutation({
+    mutationFn: () => subscriptionsApi.subscribe(offering.id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['subscriptions'] })
+      queryClient.invalidateQueries({ queryKey: ['sessions'] })
+      queryClient.invalidateQueries({ queryKey: ['offerings'] })
+    },
+  })
+
+  if (status === 'authenticated' && !isStudent) {
+    return (
+      <Button to="/book-trial" className="mt-5 w-full justify-center">
+        {t('common.bookFreeTrial')}
+      </Button>
+    )
+  }
+
+  if (status !== 'authenticated') {
+    return (
+      <>
+        <Button to={`/login?next=${encodeURIComponent('/tutors')}`} className="mt-5 w-full justify-center">
+          {t('tutors.subscribe')}
+        </Button>
+        <Link to="/book-trial" className="mt-3 block text-center text-xs font-semibold text-teal-700 hover:underline">
+          {t('tutors.orTrial')}
+        </Link>
+      </>
+    )
+  }
+
+  const active = mine.data?.some((s) => s.taOfferingId === offering.id && s.status === 'Active')
+  if (active) {
+    return (
+      <Button to="/account/classes" variant="secondary" className="mt-5 w-full justify-center">
+        ✓ {t('tutors.subscribed')}
+      </Button>
+    )
+  }
+
+  if (offering.seatsTaken >= offering.capacity) {
+    return (
+      <Button className="mt-5 w-full justify-center" disabled>
+        {t('tutors.full')}
+      </Button>
+    )
+  }
+
+  return (
+    <>
+      <Button className="mt-5 w-full justify-center" disabled={mine.isPending || subscribe.isPending} onClick={() => subscribe.mutate()}>
+        {subscribe.isPending ? t('tutors.subscribing') : t('tutors.subscribe')}
+      </Button>
+      {subscribe.isError && <p className="mt-2 text-center text-xs text-red-700">{errorMessage(subscribe.error)}</p>}
+    </>
   )
 }

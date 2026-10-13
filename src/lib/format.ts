@@ -53,3 +53,9 @@ export function initials(name: string) {
     .map((part) => part[0]!.toUpperCase())
     .join('')
 }
+
+/** Short weekday name for a JS day index (0 = Sunday). */
+export function formatWeekday(day: number, locale: Locale) {
+  // 2024-01-07 was a Sunday.
+  return new Intl.DateTimeFormat(intlLocale(locale), { weekday: 'short' }).format(new Date(2024, 0, 7 + day))
+}

@@ -7,6 +7,7 @@ import type {
   ChangePasswordRequest,
   CreateOfferingRequest,
   CreateSessionRequest,
+  CreateSessionSeriesRequest,
   CreateTaCourseRequest,
   CreateTrialRequest,
   EarningsResponse,
@@ -68,6 +69,7 @@ export const programsApi = {
   update: (id: string, body: SaveProgramRequest) => api<ProgramDetail>(`/programs/${id}`, { method: 'PUT', body }),
   changeStatus: (id: string, status: ProgramStatus) =>
     api<ProgramDetail>(`/programs/${id}/status`, { method: 'PUT', body: { status } }),
+  delete: (id: string) => api<void>(`/programs/${id}`, { method: 'DELETE' }),
   addLesson: (id: string, title: string) => api<Lesson>(`/programs/${id}/lessons`, { method: 'POST', body: { title } }),
   updateLesson: (id: string, lessonId: string, title: string) =>
     api<Lesson>(`/programs/${id}/lessons/${lessonId}`, { method: 'PUT', body: { title } }),
@@ -89,6 +91,8 @@ export const sessionsApi = {
   mine: () => api<Session[]>('/sessions/mine'),
   create: (body: CreateSessionRequest) => api<Session>('/sessions', { method: 'POST', body }),
   cancel: (id: string) => api<Session>(`/sessions/${id}/cancel`, { method: 'POST' }),
+  createSeries: (body: CreateSessionSeriesRequest) => api<Session[]>('/sessions/series', { method: 'POST', body }),
+  cancelSeries: (seriesId: string) => api<Session[]>(`/sessions/series/${seriesId}/cancel-remaining`, { method: 'POST' }),
 }
 
 /** The signed-in tutor's own courses, students and earnings. */
@@ -99,6 +103,7 @@ export const taApi = {
   updateCourse: (id: string, body: UpdateTaCourseRequest) => api<TaCourse>(`/ta/courses/${id}`, { method: 'PUT', body }),
   changeCourseStatus: (id: string, status: ProgramStatus) =>
     api<TaCourse>(`/ta/courses/${id}/status`, { method: 'PUT', body: { status } }),
+  deleteCourse: (id: string) => api<void>(`/ta/courses/${id}`, { method: 'DELETE' }),
   addLesson: (id: string, title: string) => api<Lesson>(`/ta/courses/${id}/lessons`, { method: 'POST', body: { title } }),
   updateLesson: (id: string, lessonId: string, title: string) =>
     api<Lesson>(`/ta/courses/${id}/lessons/${lessonId}`, { method: 'PUT', body: { title } }),
@@ -111,6 +116,7 @@ export const taApi = {
 
 export const subscriptionsApi = {
   mine: () => api<Subscription[]>('/subscriptions/mine'),
+  subscribe: (taOfferingId: string) => api<Subscription>('/subscriptions', { method: 'POST', body: { taOfferingId } }),
   cancel: (id: string) => api<Subscription>(`/subscriptions/${id}/cancel`, { method: 'POST' }),
   resume: (id: string) => api<Subscription>(`/subscriptions/${id}/resume`, { method: 'POST' }),
 }

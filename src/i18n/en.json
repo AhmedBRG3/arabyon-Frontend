@@ -376,7 +376,11 @@
     "courseNotYours": "This course belongs to another tutor.",
     "courseUnavailable": "This course is no longer offered.",
     "sessionEnded": "This class has already ended, so it can't be canceled.",
-    "licenseExists": "This Zoom user is already registered as a license."
+    "licenseExists": "This Zoom user is already registered as a license.",
+    "courseHasStudents": "This course has students enrolled and can't be deleted. Archive it instead.",
+    "courseHasClasses": "This course has scheduled or past classes and can't be deleted. Archive it instead.",
+    "ownCourse": "You can't subscribe to your own course.",
+    "courseFull": "This course is full."
   },
   "auth": {
     "logout": "Log out",
@@ -440,8 +444,14 @@
     "allPrograms": "All programs",
     "empty": "No tutors are listed for this program yet. Book a free trial and we'll match you.",
     "perMonth": "per month",
-    "enrollmentNote": "Online payment is coming soon. Until then every registered student is enrolled in every course for free — create an account to join the classes.",
-    "seeTutors": "See tutors & prices"
+    "enrollmentNote": "Online payment is coming soon — until then subscribing is free. Log in as a student and press Subscribe to join a course's classes.",
+    "seeTutors": "See tutors & prices",
+    "subscribe": "Subscribe",
+    "subscribing": "Subscribing…",
+    "subscribed": "Subscribed · View classes",
+    "orTrial": "or book a free trial",
+    "full": "Course full",
+    "seats": "{taken} / {capacity} students"
   },
   "profile": {
     "title": "Profile",
@@ -533,7 +543,9 @@
     "offeringsSub": "Every tutor's live offering, with price and seats.",
     "noOfferings": "No active offerings.",
     "offeringsNote": "Only active offerings in published programs are listed. A deactivated offering can be reactivated by its tutor.",
-    "byTutor": "by {tutor}"
+    "byTutor": "by {tutor}",
+    "deleteProgram": "Delete program",
+    "confirmDeleteProgram": "Delete this program? This can't be undone. Only a program with no students and no classes can be deleted — otherwise archive it instead."
   },
   "sessions": {
     "mineTitle": "My sessions",
@@ -556,7 +568,21 @@
     "statusCompleted": "Completed",
     "statusCanceled": "Canceled",
     "cancel": "Cancel class",
-    "confirmCancel": "Cancel this class? Students will no longer see it and the Zoom meeting is deleted."
+    "confirmCancel": "Cancel this class? Students will no longer see it and the Zoom meeting is deleted.",
+    "repeat": "Repeat this class",
+    "totalCount": "Number of classes",
+    "repeatNote": "All classes are added to the schedule now. Each one gets its Zoom link automatically when it is the next class, up to 2 days before it starts.",
+    "createSeries": "Create classes",
+    "seriesPosition": "Class {n} of {total}",
+    "seriesHeading": "{title} · {total} classes · {days} at {time}",
+    "linkComing": "The Zoom link is added automatically closer to the class.",
+    "cancelRemaining": "Cancel remaining classes",
+    "confirmCancelRemaining": "Cancel every class in this series that hasn't started yet? Students will no longer see them.",
+    "startingFrom": "Starting from",
+    "time": "Time",
+    "days": "Days",
+    "pickDays": "Pick at least one day for the class.",
+    "schedulePreview": "{count} classes, from {first} to {last}."
   },
   "classes": {
     "title": "My classes",
@@ -579,7 +605,9 @@
     "pauseEnrollment": "Pause course",
     "resumeEnrollment": "Resume course",
     "notPublishedNote": "Students can't see this course until it is published. Add at least one lesson, then press Publish.",
-    "pausedNote": "This course is paused: it is hidden from Tutors & Prices and new students are not enrolled."
+    "pausedNote": "This course is paused: it is hidden from Tutors & Prices and new students are not enrolled.",
+    "deleteCourse": "Delete course",
+    "confirmDelete": "Delete this course? This can't be undone. Only a course with no students and no classes can be deleted — otherwise archive it instead."
   },
   "students": {
     "title": "Students",
@@ -590,7 +618,7 @@
   "earnings": {
     "title": "Earnings",
     "sub": "What your courses are worth each month.",
-    "freeNote": "Payments are not switched on yet: students are enrolled for free, so these are projected figures — no money is collected or paid out.",
+    "freeNote": "Payments are not switched on yet: subscribing is free, so these are projected figures — no money is collected or paid out.",
     "empty": "Create a course to see its earnings here.",
     "projectedTotal": "Projected monthly total",
     "course": "Course",
@@ -621,7 +649,7 @@
   "payments": {
     "title": "Subscriptions & payments",
     "sub": "Every student subscription and the payment behind it.",
-    "noGatewayNote": "No payment gateway is connected yet. All subscriptions are free auto-enrollments, so there are no payments, refunds or failed renewals to show.",
+    "noGatewayNote": "No payment gateway is connected yet. Students subscribe to courses for free, so there are no payments, refunds or failed renewals to show.",
     "count": "{count} subscriptions",
     "empty": "No subscriptions match this filter.",
     "student": "Student",

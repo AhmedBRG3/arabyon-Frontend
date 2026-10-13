@@ -1,6 +1,6 @@
 import { type FormEvent } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { programsApi } from '../../api/endpoints'
 import type { ProgramDetail, ProgramStatus } from '../../api/types'
 import { useI18n } from '../../i18n/I18nContext'
@@ -17,6 +17,7 @@ import { ProgramFields } from './Programs'
 export function AdminProgramDetail() {
   const { id } = useParams<{ id: string }>()
   const { t } = useI18n()
+  const navigate = useNavigate()
   const errorMessage = useErrorMessage()
   const queryClient = useQueryClient()
   const queryKey = ['admin', 'program', id]
@@ -39,12 +40,19 @@ export function AdminProgramDetail() {
     onSuccess: setProgram,
   })
   const changeStatus = useMutation({ mutationFn: (s: ProgramStatus) => programsApi.changeStatus(id!, s), onSuccess: setProgram })
+  const remove = useMutation({
+    mutationFn: () => programsApi.delete(id!),
+    onSuccess: () => {
+      refresh()
+      navigate('/admin/programs')
+    },
+  })
 
   if (program.isPending) return <PageLoader />
   if (program.isError) return <Alert tone="error">{errorMessage(program.error)}</Alert>
 
   const p = program.data
-  const mutationError = [save, changeStatus].find((m) => m.isError)?.error
+  const mutationError = [save, changeStatus, remove].find((m) => m.isError)?.error
 
   const handleSave = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -69,6 +77,16 @@ export function AdminProgramDetail() {
                 {t(`admin.statusAction.${s}`)}
               </Button>
             ))}
+            <Button
+              variant="ghost"
+              className="border-red-200 text-red-700 hover:border-red-300 hover:bg-red-50"
+              disabled={remove.isPending}
+              onClick={() => {
+                if (window.confirm(t('admin.confirmDeleteProgram'))) remove.mutate()
+              }}
+            >
+              {t('admin.deleteProgram')}
+            </Button>
           </div>
         }
       />

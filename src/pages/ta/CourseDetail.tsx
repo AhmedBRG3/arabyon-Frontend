@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { taApi } from '../../api/endpoints'
 import type { ProgramStatus, TaCourse, UpdateTaCourseRequest } from '../../api/types'
 import { useI18n } from '../../i18n/I18nContext'
@@ -18,6 +18,7 @@ import { PageLoader } from '../../components/ui/Spinner'
 export function TaCourseDetail() {
   const { id } = useParams<{ id: string }>()
   const { t } = useI18n()
+  const navigate = useNavigate()
   const errorMessage = useErrorMessage()
   const queryClient = useQueryClient()
   const queryKey = ['ta', 'course', id]
@@ -37,12 +38,19 @@ export function TaCourseDetail() {
 
   const save = useMutation({ mutationFn: (body: UpdateTaCourseRequest) => taApi.updateCourse(id!, body), onSuccess: setCourse })
   const changeStatus = useMutation({ mutationFn: (s: ProgramStatus) => taApi.changeCourseStatus(id!, s), onSuccess: setCourse })
+  const remove = useMutation({
+    mutationFn: () => taApi.deleteCourse(id!),
+    onSuccess: () => {
+      refresh()
+      navigate('/ta/courses')
+    },
+  })
 
   if (course.isPending) return <PageLoader />
   if (course.isError) return <Alert tone="error">{errorMessage(course.error)}</Alert>
 
   const c = course.data
-  const mutationError = [save, changeStatus].find((m) => m.isError)?.error
+  const mutationError = [save, changeStatus, remove].find((m) => m.isError)?.error
   const body = (overrides: Partial<UpdateTaCourseRequest> = {}): UpdateTaCourseRequest => ({
     title: c.title,
     description: c.description,
@@ -89,6 +97,16 @@ export function TaCourseDetail() {
             ))}
             <Button variant="secondary" onClick={() => save.mutate(body({ isActive: !c.isActive }))} disabled={save.isPending}>
               {c.isActive ? t('courses.pauseEnrollment') : t('courses.resumeEnrollment')}
+            </Button>
+            <Button
+              variant="ghost"
+              className="border-red-200 text-red-700 hover:border-red-300 hover:bg-red-50"
+              disabled={remove.isPending}
+              onClick={() => {
+                if (window.confirm(t('courses.confirmDelete'))) remove.mutate()
+              }}
+            >
+              {t('courses.deleteCourse')}
             </Button>
           </div>
         }

@@ -17,6 +17,13 @@ export function SessionRow({ session, showTutor = false, actions }: { session: S
           <div className="flex flex-wrap items-center gap-2">
             <h3 className="font-bold text-teal-950">{session.title}</h3>
             <Pill tone={sessionStatusTone(session.status)}>{t(`sessions.status${session.status}`)}</Pill>
+            {session.seriesSequence !== null && session.seriesTotal !== null && (
+              <Pill tone="gray">
+                {t('sessions.seriesPosition')
+                  .replace('{n}', String(session.seriesSequence))
+                  .replace('{total}', String(session.seriesTotal))}
+              </Pill>
+            )}
           </div>
           <p className="mt-0.5 text-sm text-ink-700">
             {session.programTitle}
@@ -25,6 +32,9 @@ export function SessionRow({ session, showTutor = false, actions }: { session: S
           <p className="mt-1 text-sm text-ink-500">
             {formatDateTime(session.startsAtUtc, locale)} – {formatTime(session.endsAtUtc, locale)}
           </p>
+          {!session.joinUrl && session.status === 'Scheduled' && (
+            <p className="mt-1 text-xs text-ink-500">{t('sessions.linkComing')}</p>
+          )}
         </div>
         <div className="flex flex-wrap gap-2">
           {actions}

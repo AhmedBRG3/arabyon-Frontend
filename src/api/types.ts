@@ -193,7 +193,11 @@ export interface Session {
   startsAtUtc: string
   endsAtUtc: string
   status: SessionStatus
+  /** Null until the class gets its Zoom meeting; a series books each class shortly before it. */
   joinUrl: string | null
+  seriesId: string | null
+  seriesSequence: number | null
+  seriesTotal: number | null
 }
 
 export interface SessionListQuery extends PageQuery {
@@ -207,6 +211,22 @@ export interface CreateSessionRequest {
   title: string
   startsAtUtc: string
   endsAtUtc: string
+}
+
+export type DayOfWeek = 'Sunday' | 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday'
+
+/** Classes on `daysOfWeek` at `startTime`, local to `timeZone` (IANA), counting from `startDate`. */
+export interface CreateSessionSeriesRequest {
+  taOfferingId: string
+  title: string
+  /** "YYYY-MM-DD" */
+  startDate: string
+  /** "HH:mm:ss" */
+  startTime: string
+  timeZone: string
+  daysOfWeek: DayOfWeek[]
+  durationMinutes: number
+  totalCount: number
 }
 
 // Tutor courses: a program the tutor owns plus their priced offering of it. `id` is the program id.
@@ -244,7 +264,7 @@ export interface UpdateTaCourseRequest {
   isActive: boolean
 }
 
-// Subscriptions (free auto-enrollment until a payment gateway exists)
+// Subscriptions (free until a payment gateway exists; a student subscribes from the course card)
 
 export interface Subscription {
   id: string

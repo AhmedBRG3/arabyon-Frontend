@@ -406,6 +406,8 @@
     "verifyTitle": "Confirm your email",
     "verifying": "Confirming your email…",
     "verifyDone": "Your email is confirmed. Thank you!",
+    "resendVerification": "Resend verification email",
+    "resendSent": "Sent — you can resend in {seconds}s",
     "forgotTitle": "Reset your password",
     "forgotSub": "Enter your email and we'll send you a reset link.",
     "forgotDone": "If an account exists for that email, a reset link is on its way. It's valid for 30 minutes.",

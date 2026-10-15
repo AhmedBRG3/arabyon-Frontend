@@ -3,6 +3,7 @@ import type { Role } from '../../api/types'
 import { useAuth } from '../../auth/AuthContext'
 import { useI18n } from '../../i18n/I18nContext'
 import { Container } from '../layout/Container'
+import { ResendVerificationButton } from '../auth/ResendVerificationButton'
 import { Alert } from '../ui/Alert'
 
 interface NavGroup {
@@ -100,8 +101,9 @@ export function DashboardLayout() {
 
         <div className="min-w-0">
           {user && !user.emailVerified && (
-            <Alert tone="warning" className="mb-6">
-              {t('dashboard.verifyEmailBanner')}
+            <Alert tone="warning" className="mb-6 flex flex-wrap items-center justify-between gap-3">
+              <span>{t('dashboard.verifyEmailBanner')}</span>
+              <ResendVerificationButton email={user.email} />
             </Alert>
           )}
           <Outlet />

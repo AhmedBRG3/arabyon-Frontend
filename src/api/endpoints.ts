@@ -46,6 +46,7 @@ import type {
 export const authApi = {
   register: (body: RegisterRequest) => api<void>('/auth/register', { method: 'POST', body }),
   verifyEmail: (token: string) => api<void>('/auth/verify-email', { method: 'POST', body: { token } }),
+  resendVerification: (email: string) => api<void>('/auth/resend-verification', { method: 'POST', body: { email } }),
   login: (body: LoginRequest) => api<AccessTokenResponse>('/auth/login', { method: 'POST', body }),
   logout: () => api<void>('/auth/logout', { method: 'POST' }),
   forgotPassword: (email: string) => api<void>('/auth/forgot-password', { method: 'POST', body: { email } }),

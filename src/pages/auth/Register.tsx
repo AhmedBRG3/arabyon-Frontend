@@ -4,6 +4,7 @@ import { authApi } from '../../api/endpoints'
 import { useI18n } from '../../i18n/I18nContext'
 import { useErrorMessage } from '../../lib/useErrorMessage'
 import { AuthCard, authLinkClass } from '../../components/auth/AuthCard'
+import { ResendVerificationButton } from '../../components/auth/ResendVerificationButton'
 import { Alert } from '../../components/ui/Alert'
 import { Button } from '../../components/ui/Button'
 import { Label, TextInput } from '../../components/ui/Field'
@@ -17,6 +18,7 @@ export function Register() {
   const [sending, setSending] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [done, setDone] = useState(false)
+  const [registeredEmail, setRegisteredEmail] = useState('')
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -27,12 +29,14 @@ export function Register() {
     }
     setSending(true)
     setError(null)
+    const email = String(data.get('email')).trim()
     try {
       await authApi.register({
         fullName: String(data.get('fullName')).trim(),
-        email: String(data.get('email')).trim(),
+        email,
         password: String(data.get('password')),
       })
+      setRegisteredEmail(email)
       setDone(true)
     } catch (err) {
       setError(errorMessage(err))
@@ -49,9 +53,10 @@ export function Register() {
             <CheckIcon className="h-7 w-7" />
           </div>
           <p className="mt-4 text-sm leading-relaxed text-ink-700">{t('auth.registerDoneDesc')}</p>
-          <Button to="/login" className="mt-6">
-            {t('auth.loginSubmit')}
-          </Button>
+          <div className="mt-6 flex flex-col items-center gap-3">
+            <Button to="/login">{t('auth.loginSubmit')}</Button>
+            <ResendVerificationButton email={registeredEmail} />
+          </div>
         </div>
       </AuthCard>
     )

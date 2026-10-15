@@ -10,9 +10,11 @@ const tones: Record<Tone, string> = {
 }
 
 export function Alert({ tone = 'info', children, className = '' }: { tone?: Tone; children: ReactNode; className?: string }) {
+  // A div, not a p: some callers (e.g. a verify-email banner with a resend button) nest block content,
+  // which isn't valid inside a <p>.
   return (
-    <p role={tone === 'error' ? 'alert' : 'status'} className={`rounded-xl p-3 text-sm ${tones[tone]} ${className}`}>
+    <div role={tone === 'error' ? 'alert' : 'status'} className={`rounded-xl p-3 text-sm ${tones[tone]} ${className}`}>
       {children}
-    </p>
+    </div>
   )
 }

@@ -20,7 +20,8 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [react(), tailwindcss()],
-    server: { proxy: apiProxy },
-    preview: { proxy: apiProxy },
+    // host: true also listens on the LAN, so the app can be opened from a phone on the same Wi-Fi.
+    server: { host: true, proxy: apiProxy },
+    preview: { host: true, proxy: apiProxy },
   }
 })
